@@ -1,0 +1,89 @@
+<head>
+    <script src="https://kit.fontawesome.com/b52cac57d7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+
+<header>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" [routerLink]="['/inicio']">Clima UTA</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <div class="item" [routerLink]="['/inicio']" [routerLinkActive]="['active']">
+          <li class="nav-item">
+            <a class="text-bar">Inicio</a>
+            
+          </li>
+          </div>
+          <div class="item" [routerLink]="['/repositorio']" [routerLinkActive]="['active']">
+          <li class="nav-item">
+            <a class="text-bar">Repositorio</a>
+            
+          </li>
+          </div>
+          <div class="item" [routerLink]="['/mapa']" [routerLinkActive]="['active']">
+          <li class="nav-item">
+            <a class="text-bar">Mapa</a>
+            
+          </li>
+          </div>
+          <div class="item" [routerLink]="['/comparacion']" [routerLinkActive]="['active']">
+          <li class="nav-item">
+            <a class="text-bar">Comparacion</a>
+          </li>
+          </div>
+          <div class="item" [routerLink]="['/equipo']" [routerLinkActive]="['active']">
+          <li class="nav-item">
+            <a class="text-bar">Equipo</a>
+          </li>
+          </div>  
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<body>
+  <div class="container contenido">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-sm-10" id="content">
+          <router-outlet></router-outlet> 
+        </div>
+      <div class="col"></div>
+    </div>
+
+
+  </div>
+</body>
+
+
+
+
+
+<footer class="text-center text-lg-start bg-primary position-static">
+    <div class="container d-flex justify-content-center py-5">
+      <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #54456b;">
+        <i class="fab fa-facebook-f"></i>
+      </button>
+      <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #54456b;">
+        <i class="fab fa-youtube"></i>
+      </button>
+      <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #54456b;">
+        <i class="fab fa-instagram"></i>
+      </button>
+      <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #54456b;">
+        <i class="fab fa-twitter"></i>
+      </button>
+    </div>
+
+    <!-- Copyright -->
+    <div class="text-center text-white p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2021 Copyright:
+      <a class="text-white" href="https://www.uta.cl/index.php/sede-iquique/">Universidad de Tarapacá</a>
+    </div>
+    <!-- Copyright -->
+  </footer>

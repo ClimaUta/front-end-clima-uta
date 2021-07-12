@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="row">
+      <div class="col espacio lado">
+        <div class="card text-center border border-primary" >
+            <div class="card-header bg-primary">
+                <h5 class="text-bar">Nuestros datos</h5>
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <div *ngIf="carga1; else noCargado">
+                  <h2 class="card-title">Temperatura: {{climas[0].AMBIENT_TEMPERATURE}} C°</h2>
+                  <b class="card-text text-center">
+                    Presion: {{climas[0].AIR_PRESSURE}} hPa<br>
+                    Humedad: {{climas[0].HUMIDITY}}%
+                  </b>
+                </div>
+                <ng-template #noCargado>
+                  <div class="spinner-border text-primary align-middle" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <h3>Cargando...</h3><br>
+                </ng-template>
+              </blockquote>
+            </div>
+          </div>
+      </div>
+      <div class="col espacio">
+        <div class="card text-center border border-primary">
+            <div class="card-header bg-primary">
+                <h5 class="text-bar">OpenWeather</h5>
+            </div>
+            <div class="card-body">
+
+              <blockquote class="blockquote mb-0">
+                <div *ngIf="carga2; else noCargado2">
+                  <h2 class="card-title">Temperatura: {{temp}} C°</h2>
+                  <b class="card-text text-center">
+                      Presion: {{pres}} hPa<br>
+                      Humedad: {{hum}}%
+                    </b>
+                </div>
+                <ng-template #noCargado2>
+                  <div class="spinner-border text-primary align-middle" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <h3>Cargando...</h3><br>
+                </ng-template>
+              </blockquote>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card text-center border border-primary">
+    <div class="card-header bg-primary">
+        <h5 class="text-bar">Tiempo en los dias siguientes</h5>
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <div class="container">
+            <div class="row">
+                <div class="col border-end border-primary border-2">
+                    Column
+                </div>
+                <div class="col border-end border-primary border-2">
+                    Column
+                </div>
+                <div class="col border-end border-primary border-2">
+                    Column
+                </div>
+                <div class="col border-end border-primary border-2">
+                    Column
+                </div>
+                <div class="col border-end border-primary border-2">
+                    Column
+                </div>
+                <div class="col border-end border-primary border-2">
+                    Column
+                </div>
+                <div class="col">
+                    Column
+                </div>
+            </div>
+          </div>
+      </blockquote>
+    </div>
+  </div>

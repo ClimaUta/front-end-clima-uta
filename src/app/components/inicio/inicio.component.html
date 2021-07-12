@@ -1,0 +1,34 @@
+<div class="card text-center border border-primary" *ngFor="let clima of climas" [(ngModel)]="climas" ngDefaultControl>
+    <div class="card-header bg-primary">
+      <h5 class="text-bar">Clima actual</h5>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-8">
+          <h1 class="card-title">Temperatura: {{clima.AMBIENT_TEMPERATURE}} C°</h1>
+        </div>
+        <div class="col-4">
+          <b class="card-text text-center">
+            Presion: {{clima.AIR_PRESSURE}} hPa<br>
+            Humedad: {{clima.HUMIDITY}}%
+          </b>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      Fecha: {{clima.CREATED}}
+    </div>
+  </div>
+<br>
+  <div class="card text-center border border-primary">
+    <div class="card-header bg-primary">
+        <h5 class="text-bar">Graficas</h5>
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <div>
+          <h2>Graficas fuera de servicio</h2>
+      </div>
+      </blockquote>
+    </div>
+  </div>

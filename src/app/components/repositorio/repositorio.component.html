@@ -1,0 +1,45 @@
+<div class="card text-center border border-primary">
+    <div class="card-header bg-primary">
+        <h5 class="text-bar">Repositorio</h5>
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <p>
+          Un repositorio es un espacio centralizado donde se almacena, organiza, mantiene y difunde información digital, habitualmente archivos informáticos, que pueden contener trabajos científicos, conjuntos de datos o software.
+        </p>
+        <p>  
+          Actualmente se ofrecen tres archivos en formato <b>“.csv”</b>, lo cuales cada uno contiene información concerniente al clima de la ciudad de Iquique. El archivo llamado <b>“registros.csv”</b>, contiene todas las variables climáticas capturadas por los distintos sensores distribuidos a lo largo de la ciudad.
+        </p>
+        <p>
+          Por otro lado <b>“climas.csv”</b>, contiene la temperatura captada en la ciudad de Iquique a lo largo del tiempo, acompañado de la presión, humedad y condición climática.
+        </p>
+        <p>
+          Por último está el archivo llamado <b>"predicciones.csv"</b>, en este se almacenan las predicciones climáticas realizado por nuestros modelos a lo largo del tiempo.
+        </p>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div *ngIf="registro; else noRegistro">
+                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_registros()"><i class="fas fa-download"></i> Descargar registros.csv</button>
+              </div>
+              <ng-template #noRegistro>
+                <button class="btn btn-primary btn-md boton" type="button" disabled>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Descargar registros.csv
+                </button>
+              </ng-template>
+            </div>
+            <div class="col">
+              <button type="button" class="btn btn-primary btn-md boton" (click)="descargar_registros()" disabled><i class="fas fa-download"></i> Descargar climas.csv</button>
+            </div>
+            <div class="col">
+              <button type="button" class="btn btn-primary btn-md boton" (click)="descargar_registros()" disabled><i class="fas fa-download"></i> Descargar predicciones.csv</button>
+            </div>
+          </div>
+        </div>
+        
+        
+      </blockquote>
+    </div>
+  </div>
+  <!--<button (click)="download()"> Download </button>-->
