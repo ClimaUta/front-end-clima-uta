@@ -1,0 +1,30 @@
+.map-container {
+    position: static;
+    height: 500px;
+    z-index: 0;
+  }
+  
+  .map-frame {
+    border: 2px solid #0275d8;
+    height: 100%;
+    z-index: 0;
+  }
+  
+  #map {
+    height: 100%;
+    z-index: 0;
+  }
+
+  .borde{
+    border-top: 2px solid #0275d8;
+    border-bottom: 2px solid #0275d8;
+  }
+
+  .chart{
+    position: relative;
+    min-height: unset;
+  }
+
+  .no-disponible{
+    padding-top: 15px;
+  }

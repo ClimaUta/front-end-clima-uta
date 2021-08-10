@@ -1,0 +1,14 @@
+body {
+    padding-top: 50px;
+}
+
+.espacio{
+    padding-bottom: 10px;
+}
+
+.footer{
+    position:fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+}

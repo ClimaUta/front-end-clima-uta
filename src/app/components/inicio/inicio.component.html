@@ -1,33 +1,84 @@
-<div class="card text-center border border-primary" *ngFor="let clima of climas" [(ngModel)]="climas" ngDefaultControl>
-    <div class="card-header bg-primary">
-      <h5 class="text-bar">Clima actual</h5>
+
+  <div class="card text-center border border-primary" ngDefaultControl>
+      <div class="card-header bg-primary">
+        <h5 class="text-bar">Clima actual</h5>
+      </div>
+      <div class="card-body">
+        <div *ngIf="carga; else noCargado">
+          <div class="row">
+            <div class="col">
+              <h1 class="card-title borde">
+                Temperatura <br> {{climas[0].AMBIENT_TEMPERATURE}} C°
+              </h1>
+            </div>
+            <div class="col">
+              <h1 class="card-title text-center borde">
+                Presion <br> {{climas[0].AIR_PRESSURE}} hPa
+              </h1>
+            </div>
+            <div class="col">
+              <h1 class="card-title text-center borde">
+                Humedad <br> {{climas[0].HUMIDITY}}%
+              </h1>
+            </div>
+          </div>
+        </div> 
+        <ng-template #noCargado>
+          <div class="spinner-border text-primary align-middle" role="status">
+            <span class="sr-only"></span>
+          </div>
+          <h3>Cargando...</h3><br>
+        </ng-template>
+
+      </div>
+      
+      <div class="card-footer text-muted">
+        Fecha: {{climas[0].CREATED}}
+      </div>
+
+      
+
     </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-8">
-          <h1 class="card-title">Temperatura: {{clima.AMBIENT_TEMPERATURE}} C°</h1>
-        </div>
-        <div class="col-4">
-          <b class="card-text text-center">
-            Presion: {{clima.AIR_PRESSURE}} hPa<br>
-            Humedad: {{clima.HUMIDITY}}%
-          </b>
+<br>
+
+<div class="card text-center border border-primary">
+  <div class="card-header bg-primary">
+      <h5 class="text-bar">Mapa de sensores</h5>
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <div class="map-container">
+        <div class="map-frame">
+          <div id="map"></div>
         </div>
       </div>
-    </div>
-    <div class="card-footer text-muted">
-      Fecha: {{clima.CREATED}}
-    </div>
+    </blockquote>
   </div>
+</div>
+
 <br>
-  <div class="card text-center border border-primary">
+  <div class="card text-center border border-primary" style="display: block; width: 100%;">
     <div class="card-header bg-primary">
-        <h5 class="text-bar">Graficas</h5>
+        <h5 class="text-bar">Temperatura en las últimas 24 horas</h5>
     </div>
-    <div class="card-body">
+    <div>
       <blockquote class="blockquote mb-0">
         <div>
-          <h2>Graficas fuera de servicio</h2>
+          <div class="chart d-none d-sm-block">
+            <canvas baseChart width="2" height="1"
+                [datasets]="lineChartData" 
+                [labels]="lineChartLabels" 
+                [options]="lineChartOptions"
+                [colors]="lineChartColors" 
+                [legend]="lineChartLegend" 
+                [chartType]="lineChartType" 
+                [plugins]="lineChartPlugins">
+            </canvas>
+        </div>
+      </div>
+
+      <div class="d-block d-sm-none text-center">
+        <p class="text-center no-disponible"><b>Contenido no disponible en version Mobile.</b></p>
       </div>
       </blockquote>
     </div>

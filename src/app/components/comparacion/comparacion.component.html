@@ -33,6 +33,15 @@
 
               <blockquote class="blockquote mb-0">
                 <div *ngIf="carga2; else noCargado2">
+                  <div class="cropped" [ngSwitch]="cielo">
+                    
+                    <!--Iconos en movimiento del tiempo-->
+
+                    <!--<img src="../../../assets/icons/weather/cloudy.svg" height="200" width="200" *ngSwitchCase="'Clouds'">
+                    <img src="../../../assets/icons/weather/rainy-1.svg" height="300" width="300" *ngSwitchCase="'Rain'">
+                    <img src="../../../assets/icons/weather/snowy-1.svg" height="300" width="300" *ngSwitchCase="'Snow'">
+                    <img src="../../../assets/icons/weather/day.svg" height="300" width="300" *ngSwitchCase="'Clear'">-->
+                  </div>
                   <h2 class="card-title">Temperatura: {{temp}} C°</h2>
                   <b class="card-text text-center">
                       Presion: {{pres}} hPa<br>
@@ -52,37 +61,289 @@
     </div>
   </div>
 
-  <div class="card text-center border border-primary">
-    <div class="card-header bg-primary">
-        <h5 class="text-bar">Tiempo en los dias siguientes</h5>
-    </div>
-    <div class="card-body">
-      <blockquote class="blockquote mb-0">
-        <div class="container">
-            <div class="row">
-                <div class="col border-end border-primary border-2">
-                    Column
-                </div>
-                <div class="col border-end border-primary border-2">
-                    Column
-                </div>
-                <div class="col border-end border-primary border-2">
-                    Column
-                </div>
-                <div class="col border-end border-primary border-2">
-                    Column
-                </div>
-                <div class="col border-end border-primary border-2">
-                    Column
-                </div>
-                <div class="col border-end border-primary border-2">
-                    Column
-                </div>
-                <div class="col">
-                    Column
-                </div>
-            </div>
+
+
+  <div class="espacio">
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"> Modelo 1 - RF</button>
+        <button class="nav-link borde" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Modelo 2 - DNN</button>
+        <button class="nav-link borde" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Modelo 3 - ARIMA</button>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <!--Contenido del TAB-->
+        <div class="card text-center border border-primary">
+          <div class="card-header bg-primary">
+            <h5 class="text-bar">Nuestras predicciones</h5>
           </div>
-      </blockquote>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <!----------------------------------------------------------------------------------------------->
+              
+
+
+              <!----------------------------------------------------------------------------------------------->
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table table-bordered table-striped mb-0">
+                  <thead>
+                    <tr>
+                      <th class="header" scope="col" >Temperatura (C°)</th>
+                      <th class="header" scope="col">Presion (hPa)</th>
+                      <th class="header" scope="col">Humedad (%)</th>
+                      <th class="header" scope="col">Fecha</th>
+                      <th class="header" scope="col">Hora</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let datos of Modelo1;">
+                      <td>{{datos.AMBIENT_TEMPERATURE}}</td>
+                      <td>{{datos.AIR_PRESSURE}}</td>
+                      <td>{{datos.HUMIDITY}}%</td>
+                      <td>{{datos.day}}/{{datos.month}}/{{year}}</td>
+                      <td>{{datos.hour}}:00</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </blockquote>
+          </div>
+        </div>
+
+        <div class="espacio2">
+
+        </div>
+
+        <div class="chart">
+          <canvas baseChart width="2" height="1"
+              [datasets]="lineChartData_temp_m1" 
+              [labels]="lineChartLabels" 
+              [options]="lineChartOptions"
+              [colors]="lineChartColors" 
+              [legend]="lineChartLegend" 
+              [chartType]="lineChartType" 
+              [plugins]="lineChartPlugins">
+          </canvas>
+        </div>
+
+        <div class="espacio2">
+
+        </div>
+
+        <div class="chart">
+          <canvas baseChart width="2" height="1"
+              [datasets]="lineChartData_press_m1" 
+              [labels]="lineChartLabels" 
+              [options]="lineChartOptions"
+              [colors]="lineChartColors" 
+              [legend]="lineChartLegend" 
+              [chartType]="lineChartType" 
+              [plugins]="lineChartPlugins">
+          </canvas>
+        </div>
+
+        <div class="espacio2">
+
+        </div>
+
+        <div class="chart">
+          <canvas baseChart width="2" height="1"
+              [datasets]="lineChartData_hum_m1" 
+              [labels]="lineChartLabels" 
+              [options]="lineChartOptions"
+              [colors]="lineChartColors" 
+              [legend]="lineChartLegend" 
+              [chartType]="lineChartType" 
+              [plugins]="lineChartPlugins">
+          </canvas>
+      </div>
+
+        <!--Fin cntendino del TAB-->
+
+      </div>
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <!--Contenido del TAB-->
+        <div class="card text-center border border-primary">
+          <div class="card-header bg-primary">
+            <h5 class="text-bar">Nuestras predicciones</h5>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table table-bordered table-striped mb-0">
+                  <thead>
+                    <tr>
+                      <th class="header" scope="col" >Temperatura (C°)</th>
+                      <th class="header" scope="col">Presion (hPa)</th>
+                      <th class="header" scope="col">Humedad (%)</th>
+                      <th class="header" scope="col">Fecha</th>
+                      <th class="header" scope="col">Hora</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let datos of Modelo2;">
+                      <td>{{datos.AMBIENT_TEMPERATURE}}</td>
+                      <td>{{datos.AIR_PRESSURE}}</td>
+                      <td>{{datos.HUMIDITY}}%</td>
+                      <td>{{datos.day}}/{{datos.month}}/{{year}}</td>
+                      <td>{{datos.hour}}:00</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </blockquote>
+          </div>
+        </div>
+
+        <div class="espacio2">
+
+        </div>
+
+        <div class="chart">
+          <canvas baseChart width="2" height="1"
+              [datasets]="lineChartData_temp_m2" 
+              [labels]="lineChartLabels" 
+              [options]="lineChartOptions"
+              [colors]="lineChartColors" 
+              [legend]="lineChartLegend" 
+              [chartType]="lineChartType" 
+              [plugins]="lineChartPlugins">
+          </canvas>
+        </div>
+
+        <div class="espacio2">
+
+        </div>
+
+        <div class="chart">
+          <canvas baseChart width="2" height="1"
+              [datasets]="lineChartData_press_m2" 
+              [labels]="lineChartLabels" 
+              [options]="lineChartOptions"
+              [colors]="lineChartColors" 
+              [legend]="lineChartLegend" 
+              [chartType]="lineChartType" 
+              [plugins]="lineChartPlugins">
+          </canvas>
+        </div>
+
+        <div class="espacio2">
+
+        </div>
+
+        <div class="chart">
+          <canvas baseChart width="2" height="1"
+              [datasets]="lineChartData_hum_m2" 
+              [labels]="lineChartLabels" 
+              [options]="lineChartOptions"
+              [colors]="lineChartColors" 
+              [legend]="lineChartLegend" 
+              [chartType]="lineChartType" 
+              [plugins]="lineChartPlugins">
+          </canvas>
+      </div>
+
+        <!--Fin cntendino del TAB-->
+      </div>
+      <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+        <!--Contenido del TAB-->
+        <div class="card text-center border border-primary">
+          <div class="card-header bg-primary">
+            <h5 class="text-bar">Nuestras predicciones</h5>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table table-bordered table-striped mb-0">
+                  <thead>
+                    <tr>
+                      <th class="header" scope="col" >Temperatura (C°)</th>
+                      <th class="header" scope="col">Presion (hPa)</th>
+                      <th class="header" scope="col">Humedad (%)</th>
+                      <th class="header" scope="col">Fecha</th>
+                      <th class="header" scope="col">Hora</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let datos of Modelo3;">
+                      <td>{{datos.AMBIENT_TEMPERATURE}}</td>
+                      <td>{{datos.AIR_PRESSURE}}</td>
+                      <td>{{datos.HUMIDITY}}%</td>
+                      <td>{{datos.day}}/{{datos.month}}/{{year}}</td>
+                      <td>{{datos.hour}}:00</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </blockquote>
+          </div>
+        </div>
+
+        <div class="espacio2">
+
+        </div>
+
+        <div class="chart">
+          <canvas baseChart width="2" height="1"
+              [datasets]="lineChartData_temp_m3" 
+              [labels]="lineChartLabels_m3" 
+              [options]="lineChartOptions"
+              [colors]="lineChartColors" 
+              [legend]="lineChartLegend" 
+              [chartType]="lineChartType" 
+              [plugins]="lineChartPlugins">
+          </canvas>
+        </div>
+
+        <div class="espacio2">
+
+        </div>
+
+        <div class="chart">
+          <canvas baseChart width="2" height="1"
+              [datasets]="lineChartData_press_m3" 
+              [labels]="lineChartLabels_m3" 
+              [options]="lineChartOptions"
+              [colors]="lineChartColors" 
+              [legend]="lineChartLegend" 
+              [chartType]="lineChartType" 
+              [plugins]="lineChartPlugins">
+          </canvas>
+        </div>
+
+        <div class="espacio2">
+
+        </div>
+
+        <div class="chart">
+          <canvas baseChart width="2" height="1"
+              [datasets]="lineChartData_hum_m3" 
+              [labels]="lineChartLabels_m3" 
+              [options]="lineChartOptions"
+              [colors]="lineChartColors" 
+              [legend]="lineChartLegend" 
+              [chartType]="lineChartType" 
+              [plugins]="lineChartPlugins">
+          </canvas>
+      </div>
+
+        <!--Fin cntendino del TAB-->
+      </div>
     </div>
   </div>
+
+  
+
+  <!--<div class="col espacio">
+    <div class="card text-center border border-primary">
+      <div class="card-header bg-primary">
+        <h5 class="text-bar">Predicciones DGAC</h5>
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+            
+        </blockquote>
+      </div>
+    </div>
+  </div>-->

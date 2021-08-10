@@ -17,7 +17,7 @@ export class RepositorioService {
     }
 
     downloadFile(data, filename='data') {
-        let csvData = this.ConvertToCSV(data, ['ID','REMOTE_ID', 'AMBIENT_TEMPERATURE', 'AIR_PRESSURE', 'HUMIDITY', 'CREATED', 'serverDate']);
+        let csvData = this.ConvertToCSV(data, ['REMOTE_ID', 'AMBIENT_TEMPERATURE', 'AIR_PRESSURE', 'HUMIDITY', 'CREATED', 'serverDate']);
         let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
         let dwldLink = document.createElement("a");
         let url = URL.createObjectURL(blob);
@@ -36,7 +36,7 @@ export class RepositorioService {
     ConvertToCSV(objArray, headerList) {
          let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
          let str = '';
-         let row = 'S.No,';
+         let row = 'ID,';
 
          for (let index in headerList) {
              row += headerList[index] + ',';
@@ -53,7 +53,7 @@ export class RepositorioService {
              str += line + '\r\n';
          }
          return str;
-     }
+    }
 
 
     getRegistros(): Observable<any>{

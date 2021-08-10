@@ -1,3 +1,39 @@
 .espacio{
     padding-bottom: 10px;
 }
+
+.espacio2{
+    padding-bottom: 30px;
+}
+
+
+
+.nav-link{
+    color: white;
+    background-color: #0275d8;
+}
+
+.borde{
+    border-left: 1px solid white;
+}
+
+.chart{
+    position: relative;
+    min-height: unset;
+    background-color: white;
+  }
+
+  .my-custom-scrollbar {
+    position: relative;
+    height: 300px;
+    overflow: auto;
+    }
+    .table-wrapper-scroll-y {
+    display: block;
+    }
+
+.header {
+    position: sticky;
+    top: -2px;
+    background-color: #0275d8;
+}
