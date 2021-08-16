@@ -39,6 +39,12 @@ export class ClimaService{
         return this._http.get(this.url+'clima-hoy', {headers: headers});
     }
 
+    getComparacion(): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'Application/json');
+
+        return this._http.get(this.url+'clima-comparacion', {headers: headers});
+    }
+
     getClimaOpenWeather(){
         
 

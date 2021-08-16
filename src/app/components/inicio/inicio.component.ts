@@ -77,7 +77,7 @@ export class InicioComponent implements OnInit, OnDestroy, AfterViewInit {
     private _registroService: RegistroService
   ) {
     this.carga = false;
-    Observable.timer(0,5000)
+    Observable.timer(0,1000*60*60)
     .takeWhile(() => this.alive)
     .subscribe(() => {
       for(let i = 11; i < 15; i++){

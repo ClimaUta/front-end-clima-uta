@@ -79,7 +79,7 @@ export class ComparacionComponent implements OnInit {
   }
 
   getClima_hoy(){
-    this._climaService.getClimaHoy().subscribe(
+    this._climaService.getComparacion().subscribe(
       response => {
         this.clima_hoy = response;
         console.log(this.clima_hoy);
@@ -115,13 +115,16 @@ export class ComparacionComponent implements OnInit {
       response => {
         //Carga de datos para las tablas.
         this.Modelo1 = response;
+        //Orden de los datos
+        this.Modelo1.sort((a,b) => { return a.id - b.id});
         //Carga de datos para las graficas
+        console.log(this.Modelo1);
         this.Modelo1.forEach(dato_modelo1 => {
           this.data_temp_m1.push(dato_modelo1["AMBIENT_TEMPERATURE"]);
           this.data_press_m1.push(dato_modelo1["AIR_PRESSURE"]);
           this.data_hum_m1.push(dato_modelo1["HUMIDITY"]);
           
-          //this.label.push(dato_modelo1["hour"] + ":00");
+          this.label.push(dato_modelo1["hour"] + ":00");
         });
       },
       error => {
@@ -135,13 +138,15 @@ export class ComparacionComponent implements OnInit {
       response => {
         //Carga de datos para las tablas.
         this.Modelo2 = response;
+        //Orden de los datos
+        this.Modelo2.sort((a,b) => { return a.id - b.id});
         //Carga de datos para las graficas
         this.Modelo2.forEach(dato_modelo2 => {
           this.data_temp_m2.push(dato_modelo2["AMBIENT_TEMPERATURE"]);
           this.data_press_m2.push(dato_modelo2["AIR_PRESSURE"]);
           this.data_hum_m2.push(dato_modelo2["HUMIDITY"]);
 
-          this.label.push(dato_modelo2["hour"] + ":00");
+          //this.label.push(dato_modelo2["hour"] + ":00");
           
         });
       },
@@ -156,6 +161,8 @@ export class ComparacionComponent implements OnInit {
       response => {
         //Carga de datos para las tablas.
         this.Modelo3 = response;
+        //Orden de los datos
+        this.Modelo3.sort((a,b) => { return a.id - b.id});
         //Carga de datos para las graficas
         this.Modelo3.forEach(dato_modelo3 => {
           this.data_temp_m3.push(dato_modelo3["AMBIENT_TEMPERATURE"]);

@@ -6,6 +6,7 @@ export class Prediccion{
         public hour: number,
         public day: number,
         public month: number,
-        public ID: number
+        public id: number,
+        public utc: string
     ){}
 }
