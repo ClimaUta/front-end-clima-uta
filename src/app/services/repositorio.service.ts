@@ -16,22 +16,25 @@ export class RepositorioService {
         this.urlApi = Global.url;
     }
 
-    downloadFile(data, filename='data') {
-        let csvData = this.ConvertToCSV(data, ['REMOTE_ID', 'AMBIENT_TEMPERATURE', 'AIR_PRESSURE', 'HUMIDITY', 'CREATED', 'serverDate']);
-        let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
-        let dwldLink = document.createElement("a");
-        let url = URL.createObjectURL(blob);
-        let isSafariBrowser = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1;
-        if (isSafariBrowser) {  //if Safari open in new window to save file with random filename.
-            dwldLink.setAttribute("target", "_blank");
-        }
-        dwldLink.setAttribute("href", url);
-        dwldLink.setAttribute("download", filename + ".csv");
-        dwldLink.style.visibility = "hidden";
-        document.body.appendChild(dwldLink);
-        dwldLink.click();
-        document.body.removeChild(dwldLink);
+    getRegistros(): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'Application/json');
+
+        return this._http.get(this.urlApi+'get-records/', {headers: headers});
     }
+
+    getClimaTotal(): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'Application/json');
+
+        return this._http.get(this.urlApi+'climas-total', {headers: headers});
+    }
+
+    getPredicciones(modelo): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'Application/json');
+
+        return this._http.get(this.urlApi+'prediccion-total/'+ modelo, {headers: headers});
+    }
+
+    //Conversion de datos a CSV
 
     ConvertToCSV(objArray, headerList) {
          let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
@@ -55,10 +58,56 @@ export class RepositorioService {
          return str;
     }
 
+    //Descargas de datos.
 
-    getRegistros(): Observable<any>{
-        let headers = new HttpHeaders().set('Content-Type', 'Application/json');
+    downloadFile_registros(data, filename='data') {
+        let csvData = this.ConvertToCSV(data, ['REMOTE_ID', 'AMBIENT_TEMPERATURE', 'AIR_PRESSURE', 'HUMIDITY', 'CREATED', 'serverDate']);
+        let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
+        let dwldLink = document.createElement("a");
+        let url = URL.createObjectURL(blob);
+        let isSafariBrowser = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1;
+        if (isSafariBrowser) {  //if Safari open in new window to save file with random filename.
+            dwldLink.setAttribute("target", "_blank");
+        }
+        dwldLink.setAttribute("href", url);
+        dwldLink.setAttribute("download", filename + ".csv");
+        dwldLink.style.visibility = "hidden";
+        document.body.appendChild(dwldLink);
+        dwldLink.click();
+        document.body.removeChild(dwldLink);
+    }
 
-        return this._http.get(this.urlApi+'get-records/', {headers: headers});
+    downloadFile_clima(data, filename='data') {
+        let csvData = this.ConvertToCSV(data, ['AMBIENT_TEMPERATURE', 'AIR_PRESSURE', 'HUMIDITY', 'CREATED']);
+        let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
+        let dwldLink = document.createElement("a");
+        let url = URL.createObjectURL(blob);
+        let isSafariBrowser = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1;
+        if (isSafariBrowser) {  //if Safari open in new window to save file with random filename.
+            dwldLink.setAttribute("target", "_blank");
+        }
+        dwldLink.setAttribute("href", url);
+        dwldLink.setAttribute("download", filename + ".csv");
+        dwldLink.style.visibility = "hidden";
+        document.body.appendChild(dwldLink);
+        dwldLink.click();
+        document.body.removeChild(dwldLink);
+    }
+
+    downloadFile_prediccion(data, filename='data') {
+        let csvData = this.ConvertToCSV(data, ['AMBIENT_TEMPERATURE', 'AIR_PRESSURE', 'HUMIDITY', 'hour', 'day', 'month', 'year', 'utc']);
+        let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
+        let dwldLink = document.createElement("a");
+        let url = URL.createObjectURL(blob);
+        let isSafariBrowser = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1;
+        if (isSafariBrowser) {  //if Safari open in new window to save file with random filename.
+            dwldLink.setAttribute("target", "_blank");
+        }
+        dwldLink.setAttribute("href", url);
+        dwldLink.setAttribute("download", filename + ".csv");
+        dwldLink.style.visibility = "hidden";
+        document.body.appendChild(dwldLink);
+        dwldLink.click();
+        document.body.removeChild(dwldLink);
     }
 }

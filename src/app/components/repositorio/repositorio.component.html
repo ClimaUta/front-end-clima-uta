@@ -13,9 +13,9 @@
         <p>
           Por otro lado <b>“climas.csv”</b>, contiene la temperatura captada en la ciudad de Iquique a lo largo del tiempo, acompañado de la presión, humedad y condición climática.
         </p>
-        <!--<p>
-          Por último está el archivo llamado <b>"predicciones.csv"</b>, en este se almacenan las predicciones climáticas realizado por nuestros modelos a lo largo del tiempo.
-        </p>-->
+        <p>
+          Por último están los archivos llamados <b>"predicciones.csv"</b>, en estos se almacenan las predicciones climáticas realizado por nuestros modelos a lo largo del tiempo.
+        </p>
         <div class="container">
           <div class="row">
             <div class="col">
@@ -40,17 +40,61 @@
                 </button>
               </ng-template>
             </div>
-            <!--<div class="col">
-              <div *ngIf="prediccion; else noRegistro">
-                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_predicciones()" disabled><i class="fas fa-download"></i> Descargar predicciones.csv</button>
+            
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div *ngIf="prediccion[0]; else noRegistro">
+                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_prediccion('rfPredictions')"><i class="fas fa-download"></i> Descargar predicciones RF.csv</button>
               </div>
               <ng-template #noRegistro>
                 <button class="btn btn-primary btn-md boton" type="button" disabled>
                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  Descargar predicciones.csv
+                  Descargar predicciones RF.csv
                 </button>
               </ng-template>
-            </div>-->
+            </div>
+            <div class="col">
+              <div *ngIf="prediccion[1]; else noRegistro">
+                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_prediccion('dnnPredictions')"><i class="fas fa-download"></i> Descargar predicciones DNN.csv</button>
+              </div>
+              <ng-template #noRegistro>
+                <button class="btn btn-primary btn-md boton" type="button" disabled>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Descargar predicciones DNN.csv
+                </button>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div *ngIf="prediccion[2]; else noRegistro">
+                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_prediccion('arimaPredictions')"><i class="fas fa-download"></i> Descargar predicciones ARIMA.csv</button>
+              </div>
+              <ng-template #noRegistro>
+                <button class="btn btn-primary btn-md boton" type="button" disabled>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Descargar predicciones ARIMA.csv
+                </button>
+              </ng-template>
+            </div>
+            <div class="col">
+              <div *ngIf="prediccion[3]; else noRegistro">
+                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_prediccion('predictions')"><i class="fas fa-download"></i> Descargar predicciones LSTM.csv</button>
+              </div>
+              <ng-template #noRegistro>
+                <button class="btn btn-primary btn-md boton" type="button" disabled>
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Descargar predicciones LSTM.csv
+                </button>
+              </ng-template>
+            </div>
           </div>
         </div>
         

@@ -29,6 +29,10 @@ export class ComparacionComponent implements OnInit {
   public data_press_m3 = [];
   public data_hum_m3 = [];
 
+  public data_temp_m4 = [];
+  public data_press_m4 = [];
+  public data_hum_m4 = [];
+
   public data_temp_hoy = [];
   public data_press_hoy = [];
   public data_hum_hoy = [];
@@ -39,7 +43,8 @@ export class ComparacionComponent implements OnInit {
 
   public Modelo1: Prediccion[];
   public Modelo2: Prediccion[]; 
-  public Modelo3: Prediccion[]; 
+  public Modelo3: Prediccion[];
+  public Modelo4: Prediccion[];
   public temp: number;
   public pres: number;
   public hum: number;
@@ -64,6 +69,7 @@ export class ComparacionComponent implements OnInit {
     this.getPredicciones_rf();
     this.getPredicciones_dnn();
     this.getPredicciones_arima();
+    this.getPredicciones_lstm();
   }
 
   getClima(){
@@ -82,7 +88,6 @@ export class ComparacionComponent implements OnInit {
     this._climaService.getComparacion().subscribe(
       response => {
         this.clima_hoy = response;
-        console.log(this.clima_hoy);
         this.clima_hoy.forEach(datos => {
             this.data_temp_hoy.push(datos["AMBIENT_TEMPERATURE"]);
             this.data_press_hoy.push(datos["AIR_PRESSURE"]);
@@ -111,14 +116,13 @@ export class ComparacionComponent implements OnInit {
   }
 
   getPredicciones_rf(){
-    this._prediccionesService.getPredicciones("rf").subscribe(
+    this._prediccionesService.getPredicciones("rfPredictions").subscribe(
       response => {
         //Carga de datos para las tablas.
         this.Modelo1 = response;
         //Orden de los datos
         this.Modelo1.sort((a,b) => { return a.id - b.id});
         //Carga de datos para las graficas
-        console.log(this.Modelo1);
         this.Modelo1.forEach(dato_modelo1 => {
           this.data_temp_m1.push(dato_modelo1["AMBIENT_TEMPERATURE"]);
           this.data_press_m1.push(dato_modelo1["AIR_PRESSURE"]);
@@ -134,7 +138,7 @@ export class ComparacionComponent implements OnInit {
   }
 
   getPredicciones_dnn(){
-    this._prediccionesService.getPredicciones("dnn").subscribe(
+    this._prediccionesService.getPredicciones("dnnPredictions").subscribe(
       response => {
         //Carga de datos para las tablas.
         this.Modelo2 = response;
@@ -157,7 +161,7 @@ export class ComparacionComponent implements OnInit {
   }
 
   getPredicciones_arima(){
-    this._prediccionesService.getPredicciones("arima").subscribe(
+    this._prediccionesService.getPredicciones("arimaPredictions").subscribe(
       response => {
         //Carga de datos para las tablas.
         this.Modelo3 = response;
@@ -170,6 +174,28 @@ export class ComparacionComponent implements OnInit {
           this.data_hum_m3.push(dato_modelo3["HUMIDITY"]);
           
           this.label_m3.push(dato_modelo3["hour"] + ":00");
+        });
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  getPredicciones_lstm(){
+    this._prediccionesService.getPredicciones("").subscribe(
+      response => {
+        //Carga de datos para las tablas.
+        this.Modelo4 = response;
+        //Orden de los datos
+        this.Modelo4.sort((a,b) => { return a.id - b.id});
+        //Carga de datos para las graficas
+        this.Modelo4.forEach(dato_modelo4 => {
+          this.data_temp_m4.push(dato_modelo4["AMBIENT_TEMPERATURE"]);
+          this.data_press_m4.push(dato_modelo4["AIR_PRESSURE"]);
+          this.data_hum_m4.push(dato_modelo4["HUMIDITY"]);
+          
+          this.label_m3.push(dato_modelo4["hour"] + ":00");
         });
       },
       error => {
@@ -199,7 +225,7 @@ export class ComparacionComponent implements OnInit {
   lineChartPlugins = [];
   lineChartType = 'line';
 
-  //--------------Grafica 1 - Modelo 1-----------------------
+  //--------------Graficas - Modelo 1-----------------------
   lineChartData_temp_m1: ChartDataSets[] = [
     { data: this.data_temp_m1, label: 'Temperatura modelo 1' },
     { data: this.data_temp_hoy, label: 'Temperatura capturada' }
@@ -216,37 +242,53 @@ export class ComparacionComponent implements OnInit {
     { data: this.data_hum_hoy, label: 'Humedad capturada' }
   ];
 
- //--------------Grafica 1 - Modelo 2-----------------------
- lineChartData_temp_m2: ChartDataSets[] = [
-  { data: this.data_temp_m2, label: 'Temperatura modelo 2' },
-  { data: this.data_temp_hoy, label: 'Temperatura capturada' }
-];
+ //--------------Graficas - Modelo 2-----------------------
+  lineChartData_temp_m2: ChartDataSets[] = [
+    { data: this.data_temp_m2, label: 'Temperatura modelo 2' },
+    { data: this.data_temp_hoy, label: 'Temperatura capturada' }
+  ];
 
-lineChartData_press_m2: ChartDataSets[] = [
-  { data: this.data_press_m2, label: 'Presion modelo 2' },
-  { data: this.data_press_hoy, label: 'Presion capturada' }
-];
+  lineChartData_press_m2: ChartDataSets[] = [
+    { data: this.data_press_m2, label: 'Presion modelo 2' },
+    { data: this.data_press_hoy, label: 'Presion capturada' }
+  ];
 
-lineChartData_hum_m2: ChartDataSets[] = [
-  { data: this.data_hum_m2, label: 'Humedad modelo 2' },
-  { data: this.data_temp_hoy, label: 'Humedad capturada' }
-];
+  lineChartData_hum_m2: ChartDataSets[] = [
+    { data: this.data_hum_m2, label: 'Humedad modelo 2' },
+    { data: this.data_temp_hoy, label: 'Humedad capturada' }
+  ];
 
- //--------------Grafica 1 - Modelo 3-----------------------
- lineChartData_temp_m3: ChartDataSets[] = [
-  { data: this.data_temp_m3, label: 'Temperatura modelo 3' },
-  { data: this.data_temp_hoy, label: 'Temperatura capturada' }
-];
+ //--------------Graficas - Modelo 3-----------------------
+  lineChartData_temp_m3: ChartDataSets[] = [
+    { data: this.data_temp_m3, label: 'Temperatura modelo 3' },
+    { data: this.data_temp_hoy, label: 'Temperatura capturada' }
+  ];
 
-lineChartData_press_m3: ChartDataSets[] = [
-  { data: this.data_press_m3, label: 'Presion modelo 3' },
-  { data: this.data_press_hoy, label: 'Presion capturada' }
-];
+  lineChartData_press_m3: ChartDataSets[] = [
+    { data: this.data_press_m3, label: 'Presion modelo 3' },
+    { data: this.data_press_hoy, label: 'Presion capturada' }
+  ];
 
-lineChartData_hum_m3: ChartDataSets[] = [
-  { data: this.data_hum_m3, label: 'Humedad modelo 3' },
-  { data: this.data_hum_hoy, label: 'Humedad capturada' }
-];
+  lineChartData_hum_m3: ChartDataSets[] = [
+    { data: this.data_hum_m3, label: 'Humedad modelo 3' },
+    { data: this.data_hum_hoy, label: 'Humedad capturada' }
+  ];
+
+  //--------------Graficas - Modelo 3-----------------------
+  lineChartData_temp_m4: ChartDataSets[] = [
+    { data: this.data_temp_m4, label: 'Temperatura modelo 4' },
+    { data: this.data_temp_hoy, label: 'Temperatura capturada' }
+  ];
+
+  lineChartData_press_m4: ChartDataSets[] = [
+    { data: this.data_press_m4, label: 'Presion modelo 4' },
+    { data: this.data_press_hoy, label: 'Presion capturada' }
+  ];
+
+  lineChartData_hum_m4: ChartDataSets[] = [
+    { data: this.data_hum_m4, label: 'Humedad modelo 4' },
+    { data: this.data_hum_hoy, label: 'Humedad capturada' }
+  ];
 
 }
 

@@ -35,12 +35,6 @@
                 <div *ngIf="carga2; else noCargado2">
                   <div class="cropped" [ngSwitch]="cielo">
                     
-                    <!--Iconos en movimiento del tiempo-->
-
-                    <!--<img src="../../../assets/icons/weather/cloudy.svg" height="200" width="200" *ngSwitchCase="'Clouds'">
-                    <img src="../../../assets/icons/weather/rainy-1.svg" height="300" width="300" *ngSwitchCase="'Rain'">
-                    <img src="../../../assets/icons/weather/snowy-1.svg" height="300" width="300" *ngSwitchCase="'Snow'">
-                    <img src="../../../assets/icons/weather/day.svg" height="300" width="300" *ngSwitchCase="'Clear'">-->
                   </div>
                   <h2 class="card-title">Temperatura: {{temp}} C°</h2>
                   <b class="card-text text-center">
@@ -66,13 +60,14 @@
   <div class="espacio">
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">RF</button>
-        <button class="nav-link borde" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">DNN</button>
-        <button class="nav-link borde" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">ARIMA</button>
+        <button class="nav-link active" id="nav-rf-tab" data-bs-toggle="tab" data-bs-target="#nav-rf" type="button" role="tab" aria-controls="nav-rf" aria-selected="true">RF</button>
+        <button class="nav-link borde" id="nav-dnn-tab" data-bs-toggle="tab" data-bs-target="#nav-dnn" type="button" role="tab" aria-controls="nav-dnn" aria-selected="false">DNN</button>
+        <button class="nav-link borde" id="nav-arima-tab" data-bs-toggle="tab" data-bs-target="#nav-arima" type="button" role="tab" aria-controls="nav-arima" aria-selected="false">ARIMA</button>
+        <button class="nav-link borde" id="nav-lstm-tab" data-bs-toggle="tab" data-bs-target="#nav-lstm" type="button" role="tab" aria-controls="nav-lstm" aria-selected="false">LSTM</button>
       </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <div class="tab-pane fade show active" id="nav-rf" role="tabpanel" aria-labelledby="nav-rf-tab">
         <!--Contenido del TAB-->
         <div class="card text-center border border-primary">
           <div class="card-header bg-primary">
@@ -85,7 +80,7 @@
 
 
               <!----------------------------------------------------------------------------------------------->
-              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+              <div class="table-wrapper-scroll-y my-custom-scrollbar" *ngIf="carga1; else noCargado">
                 <table class="table table-bordered table-striped mb-0">
                   <thead>
                     <tr>
@@ -107,6 +102,13 @@
                   </tbody>
                 </table>
               </div>
+
+              <ng-template #noCargado>
+                  <div class="spinner-border text-primary align-middle" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <h3>Cargando...</h3><br>
+                </ng-template>
             </blockquote>
           </div>
         </div>
@@ -115,7 +117,7 @@
 
         </div>
 
-        <div class="chart">
+        <div class="chart" *ngIf="carga1;">
           <canvas baseChart width="2" height="1"
               [datasets]="lineChartData_temp_m1" 
               [labels]="lineChartLabels" 
@@ -131,7 +133,7 @@
 
         </div>
 
-        <div class="chart">
+        <div class="chart" *ngIf="carga1;">
           <canvas baseChart width="2" height="1"
               [datasets]="lineChartData_press_m1" 
               [labels]="lineChartLabels" 
@@ -147,7 +149,7 @@
 
         </div>
 
-        <div class="chart">
+        <div class="chart" *ngIf="carga1;">
           <canvas baseChart width="2" height="1"
               [datasets]="lineChartData_hum_m1" 
               [labels]="lineChartLabels" 
@@ -157,12 +159,12 @@
               [chartType]="lineChartType" 
               [plugins]="lineChartPlugins">
           </canvas>
-      </div>
+        </div>
 
         <!--Fin cntendino del TAB-->
 
       </div>
-      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <div class="tab-pane fade" id="nav-dnn" role="tabpanel" aria-labelledby="nav-dnn-tab">
         <!--Contenido del TAB-->
         <div class="card text-center border border-primary">
           <div class="card-header bg-primary">
@@ -170,7 +172,7 @@
           </div>
           <div class="card-body">
             <blockquote class="blockquote mb-0">
-              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+              <div class="table-wrapper-scroll-y my-custom-scrollbar" *ngIf="carga1; else noCargado">
                 <table class="table table-bordered table-striped mb-0">
                   <thead>
                     <tr>
@@ -192,6 +194,13 @@
                   </tbody>
                 </table>
               </div>
+
+              <ng-template #noCargado>
+                <div class="spinner-border text-primary align-middle" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <h3>Cargando...</h3><br>
+              </ng-template>
             </blockquote>
           </div>
         </div>
@@ -200,7 +209,7 @@
 
         </div>
 
-        <div class="chart">
+        <div class="chart" *ngIf="carga1;">
           <canvas baseChart width="2" height="1"
               [datasets]="lineChartData_temp_m2" 
               [labels]="lineChartLabels" 
@@ -216,7 +225,7 @@
 
         </div>
 
-        <div class="chart">
+        <div class="chart" *ngIf="carga1;">
           <canvas baseChart width="2" height="1"
               [datasets]="lineChartData_press_m2" 
               [labels]="lineChartLabels" 
@@ -232,7 +241,7 @@
 
         </div>
 
-        <div class="chart">
+        <div class="chart" *ngIf="carga1;">
           <canvas baseChart width="2" height="1"
               [datasets]="lineChartData_hum_m2" 
               [labels]="lineChartLabels" 
@@ -242,11 +251,11 @@
               [chartType]="lineChartType" 
               [plugins]="lineChartPlugins">
           </canvas>
-      </div>
+        </div>
 
         <!--Fin cntendino del TAB-->
       </div>
-      <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+      <div class="tab-pane fade" id="nav-arima" role="tabpanel" aria-labelledby="nav-arima-tab">
         <!--Contenido del TAB-->
         <div class="card text-center border border-primary">
           <div class="card-header bg-primary">
@@ -254,7 +263,7 @@
           </div>
           <div class="card-body">
             <blockquote class="blockquote mb-0">
-              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+              <div class="table-wrapper-scroll-y my-custom-scrollbar" *ngIf="carga1; else noCargado">
                 <table class="table table-bordered table-striped mb-0">
                   <thead>
                     <tr>
@@ -276,6 +285,13 @@
                   </tbody>
                 </table>
               </div>
+
+              <ng-template #noCargado>
+                <div class="spinner-border text-primary align-middle" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <h3>Cargando...</h3><br>
+              </ng-template>
             </blockquote>
           </div>
         </div>
@@ -284,7 +300,7 @@
 
         </div>
 
-        <div class="chart">
+        <div class="chart" *ngIf="carga1;">
           <canvas baseChart width="2" height="1"
               [datasets]="lineChartData_temp_m3" 
               [labels]="lineChartLabels_m3" 
@@ -300,7 +316,7 @@
 
         </div>
 
-        <div class="chart">
+        <div class="chart" *ngIf="carga1;">
           <canvas baseChart width="2" height="1"
               [datasets]="lineChartData_press_m3" 
               [labels]="lineChartLabels_m3" 
@@ -316,7 +332,7 @@
 
         </div>
 
-        <div class="chart">
+        <div class="chart" *ngIf="carga1;">
           <canvas baseChart width="2" height="1"
               [datasets]="lineChartData_hum_m3" 
               [labels]="lineChartLabels_m3" 
@@ -326,24 +342,105 @@
               [chartType]="lineChartType" 
               [plugins]="lineChartPlugins">
           </canvas>
-      </div>
+        </div>
 
         <!--Fin cntendino del TAB-->
       </div>
+
+      <div class="tab-pane fade" id="nav-lstm" role="tabpanel" aria-labelledby="nav-lstm-tab">
+        <!--Contenido del TAB-->
+        <div class="card text-center border border-primary">
+          <div class="card-header bg-primary">
+            <h5 class="text-bar">Nuestras predicciones</h5>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <div class="table-wrapper-scroll-y my-custom-scrollbar" *ngIf="carga1; else noCargado">
+                <table class="table table-bordered table-striped mb-0">
+                  <thead>
+                    <tr>
+                      <th class="header" scope="col" >Temperatura (C°)</th>
+                      <th class="header" scope="col">Presion (hPa)</th>
+                      <th class="header" scope="col">Humedad (%)</th>
+                      <th class="header" scope="col">Fecha</th>
+                      <th class="header" scope="col">Hora</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let datos of Modelo4;">
+                      <td>{{datos.AMBIENT_TEMPERATURE}}</td>
+                      <td>{{datos.AIR_PRESSURE}}</td>
+                      <td>{{datos.HUMIDITY}}%</td>
+                      <td>{{datos.day}}/{{datos.month}}/{{year}}</td>
+                      <td>{{datos.hour}}:00</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <ng-template #noCargado>
+                <div class="spinner-border text-primary align-middle" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <h3>Cargando...</h3><br>
+              </ng-template>
+            </blockquote>
+          </div>
+        </div>
+
+        <div class="espacio2">
+
+        </div>
+
+        <div class="chart" *ngIf="carga1;">
+          <canvas baseChart width="2" height="1"
+              [datasets]="lineChartData_temp_m4" 
+              [labels]="lineChartLabels" 
+              [options]="lineChartOptions"
+              [colors]="lineChartColors" 
+              [legend]="lineChartLegend" 
+              [chartType]="lineChartType" 
+              [plugins]="lineChartPlugins">
+          </canvas>
+        </div>
+
+        <div class="espacio2">
+
+        </div>
+
+        <div class="chart" *ngIf="carga1;">
+          <canvas baseChart width="2" height="1"
+              [datasets]="lineChartData_press_m4" 
+              [labels]="lineChartLabels" 
+              [options]="lineChartOptions"
+              [colors]="lineChartColors" 
+              [legend]="lineChartLegend" 
+              [chartType]="lineChartType" 
+              [plugins]="lineChartPlugins">
+          </canvas>
+        </div>
+
+        <div class="espacio2">
+
+        </div>
+
+        <div class="chart" *ngIf="carga1;">
+          <canvas baseChart width="2" height="1"
+              [datasets]="lineChartData_hum_m4" 
+              [labels]="lineChartLabels" 
+              [options]="lineChartOptions"
+              [colors]="lineChartColors" 
+              [legend]="lineChartLegend" 
+              [chartType]="lineChartType" 
+              [plugins]="lineChartPlugins">
+          </canvas>
+        </div>
+
+
+        <!--Fin cntendino del TAB-->
+
+      </div>
+
+
     </div>
   </div>
-
-  
-
-  <!--<div class="col espacio">
-    <div class="card text-center border border-primary">
-      <div class="card-header bg-primary">
-        <h5 class="text-bar">Predicciones DGAC</h5>
-      </div>
-      <div class="card-body">
-        <blockquote class="blockquote mb-0">
-            
-        </blockquote>
-      </div>
-    </div>
-  </div>-->

@@ -1,30 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { RepositorioService } from '../../services/repositorio.service';
-import { ClimaService } from '../../services/clima.service';
-import { PrediccionesService } from '../../services/predicciones.service';
 
 @Component({
   selector: 'app-repositorio',
   templateUrl: './repositorio.component.html',
   styleUrls: ['./repositorio.component.css'],
-  providers: [RepositorioService, ClimaService, PrediccionesService]
+  providers: [RepositorioService]
 })
 export class RepositorioComponent implements OnInit {
 
   private jsonData;
   public registro: boolean;
   public clima: boolean;
-  public prediccion: boolean;
+  public prediccion: boolean[];
 
   constructor(
-    private _repositorioService: RepositorioService,
-    private _climaService: ClimaService,
-    private _prediccionesService: PrediccionesService
+    private _repositorioService: RepositorioService
     ) 
   {
     this.registro = true;
     this.clima = true;
-    this.prediccion = true;
+    this.prediccion = [true, true, true, true];
   }
 
   ngOnInit(): void {
@@ -37,7 +33,7 @@ export class RepositorioComponent implements OnInit {
       response => {
         console.log(response.length);
         this.jsonData = response;
-        this.download(this.jsonData);
+        this.download_registros(this.jsonData);
         this.registro = true;
       },
       error => {
@@ -47,13 +43,9 @@ export class RepositorioComponent implements OnInit {
     
   }
 
-  download(Data){
-    this._repositorioService.downloadFile(Data, 'registros_clima_uta');
-  }
-
   descargar_climas(){
     this.clima = false;
-    this._climaService.getClimaTotal().subscribe(
+    this._repositorioService.getClimaTotal().subscribe(
       response => {
         console.log(response.length);
         this.jsonData = response;
@@ -67,18 +59,14 @@ export class RepositorioComponent implements OnInit {
     
   }
 
-  download_clima(Data){
-    this._climaService.downloadFile(Data, 'climas_clima_uta');
-  }
-
-  /*descargar_predicciones(){
-    this.prediccion = false;
-    this._prediccionesService.getPredicciones_rf().subscribe(
+  descargar_prediccion(modelo, i){
+    this.prediccion[i] = false;
+    this._repositorioService.getPredicciones(modelo).subscribe(
       response => {
         console.log(response.length);
         this.jsonData = response;
-        this.download_predicciones(this.jsonData);
-        this.prediccion = true;
+        this.download_prediccion(this.jsonData, modelo);
+        this.prediccion[i] = true;
       },
       error => {
         console.log(error);
@@ -87,8 +75,16 @@ export class RepositorioComponent implements OnInit {
     
   }
 
-  download_predicciones(Data){
-    this._prediccionesService.downloadFile(Data, 'predicciones_clima_uta');
-  }*/
+  download_registros(Data){
+    this._repositorioService.downloadFile_registros(Data, 'registros_clima_uta');
+  }
+
+  download_clima(Data){
+    this._repositorioService.downloadFile_clima(Data, 'climas_clima_uta');
+  }
+
+  download_prediccion(Data, modelo){
+    this._repositorioService.downloadFile_prediccion(Data, modelo+'_clima_uta');
+  }
 
 }

@@ -47,11 +47,16 @@
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
-      <div class="map-container">
-        <div class="map-frame">
-          <div id="map"></div>
+      <div *ngIf="carga; else prueba">
+        <div class="map-container">
+          <div class="map-frame">
+            <div id="map"></div>
+          </div>
         </div>
       </div>
+      <ng-template #prueba>
+        <h1>Prueba</h1>
+      </ng-template>
     </blockquote>
   </div>
 </div>
@@ -61,10 +66,10 @@
     <div class="card-header bg-primary">
         <h5 class="text-bar">Temperatura en las últimas 24 horas</h5>
     </div>
-    <div>
+    <div *ngIf="carga; else noCargado">
       <blockquote class="blockquote mb-0">
         <div>
-          <div class="chart d-none d-sm-block">
+          <div class="chart">
             <canvas baseChart width="2" height="1"
                 [datasets]="lineChartData" 
                 [labels]="lineChartLabels" 
@@ -74,12 +79,17 @@
                 [chartType]="lineChartType" 
                 [plugins]="lineChartPlugins">
             </canvas>
+          </div>
         </div>
-      </div>
-
-      <div class="d-block d-sm-none text-center">
-        <p class="text-center no-disponible"><b>Contenido no disponible en version Mobile.</b></p>
-      </div>
       </blockquote>
     </div>
+
+    <ng-template #noCargado>
+      <div class="spinner-border text-primary align-middle" role="status">
+        <span class="sr-only"></span>
+      </div>
+      <h3>Cargando...</h3><br>
+    </ng-template>
   </div>
+
+  
