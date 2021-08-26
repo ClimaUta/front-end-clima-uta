@@ -84,6 +84,8 @@ export class ComparacionComponent implements OnInit {
     );
   }
 
+  //-----------------------CARGA DE DATOS------------------------------------
+
   getClima_hoy(){
     this._climaService.getComparacion().subscribe(
       response => {

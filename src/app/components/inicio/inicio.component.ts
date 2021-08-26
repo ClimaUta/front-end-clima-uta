@@ -107,25 +107,25 @@ export class InicioComponent implements OnInit, OnDestroy, AfterViewInit {
         this.initMap();
 
         //Marcas iniciales del mapa
-        this.marker[0] = L.circle([-20.22382,-70.14652], 200, {color: "red"}).addTo(this.map);
+        this.marker[0] = L.circle([-20.252431, -70.126771], 200, {color: "red"}).addTo(this.map);
         this.marker[0].bindPopup(
           "<h4>Sensor: 11</h4>" +
           "Fuera de servicio"
           );
     
-        this.marker[1] = L.circle([-20.2195, -70.1417], 200, {color: "green"}).addTo(this.map);
+        this.marker[1] = L.circle([-20.214258, -70.133578], 200, {color: "green"}).addTo(this.map);
         this.marker[1].bindPopup(
           "<h4>Sensor: 12</h4>" +
           "Fuera de servicio"
           );
         
-        this.marker[2] = L.circle([-20.2166, -70.1325], 200, {color: "purple"}).addTo(this.map);
+        this.marker[2] = L.circle([-20.237312, -70.130552], 200, {color: "purple"}).addTo(this.map);
         this.marker[2].bindPopup(
           "<h4>Sensor: 13</h4>" +
           "Fuera de servicio"
           );
     
-        this.marker[3] = L.circle([-20.2287, -70.1313], 200).addTo(this.map);
+        this.marker[3] = L.circle([-20.223989, -70.134682], 200).addTo(this.map);
         this.marker[3].bindPopup(
           "<h4>Sensor: 14</h4>" +
           "Fuera de servicio"
