@@ -85,7 +85,8 @@ export class ComparacionComponent implements OnInit {
   }
 
   //-----------------------CARGA DE DATOS------------------------------------
-
+  //Peticion HTTP hacia la Api clima-uta, donde se cargan los datos a mostrar en la graficas
+  // de la pagina de comparacion.
   getClima_hoy(){
     this._climaService.getComparacion().subscribe(
       response => {
@@ -102,6 +103,9 @@ export class ComparacionComponent implements OnInit {
     );
   }
 
+  /**
+   * Consulta a la api de Openweather para obtener el clima actual de Iquique
+   */
   getClimaOpenWeather(){
     this._climaService.getClimaOpenWeather().subscribe(
       response => {
@@ -183,6 +187,8 @@ export class ComparacionComponent implements OnInit {
       }
     );
   }
+
+ //----------------------------CONSULTAS A LA API CLIMA-UTA PARA OBTENER LAS PREDICCIONES DE LOS MODELOS--------------
 
   getPredicciones_lstm(){
     this._prediccionesService.getPredicciones("").subscribe(

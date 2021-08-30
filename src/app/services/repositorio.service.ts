@@ -34,7 +34,7 @@ export class RepositorioService {
         return this._http.get(this.urlApi+'prediccion-total/'+ modelo, {headers: headers});
     }
 
-    //Conversion de datos a CSV
+    //Tabulacion de datos
 
     ConvertToCSV(objArray, headerList) {
          let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
@@ -58,7 +58,7 @@ export class RepositorioService {
          return str;
     }
 
-    //Descargas de datos.
+    //Conversion a achivo CSV y descarga.
 
     downloadFile_registros(data, filename='data') {
         let csvData = this.ConvertToCSV(data, ['REMOTE_ID', 'AMBIENT_TEMPERATURE', 'AIR_PRESSURE', 'HUMIDITY', 'CREATED', 'serverDate']);
@@ -77,6 +77,7 @@ export class RepositorioService {
         document.body.removeChild(dwldLink);
     }
 
+    //Conversion a achivo CSV y descarga.
     downloadFile_clima(data, filename='data') {
         let csvData = this.ConvertToCSV(data, ['AMBIENT_TEMPERATURE', 'AIR_PRESSURE', 'HUMIDITY', 'CREATED']);
         let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
@@ -94,6 +95,7 @@ export class RepositorioService {
         document.body.removeChild(dwldLink);
     }
 
+    //Conversion a achivo CSV y descarga.
     downloadFile_prediccion(data, filename='data') {
         let csvData = this.ConvertToCSV(data, ['AMBIENT_TEMPERATURE', 'AIR_PRESSURE', 'HUMIDITY', 'hour', 'day', 'month', 'year', 'utc']);
         let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });

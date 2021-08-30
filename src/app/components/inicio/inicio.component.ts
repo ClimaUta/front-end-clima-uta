@@ -55,7 +55,6 @@ export class InicioComponent implements OnInit, OnDestroy, AfterViewInit {
     this.map = L.map('map', {
       center: [ -20.2195, -70.1417 ],
       zoom: 3
-
     });
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -76,16 +75,20 @@ export class InicioComponent implements OnInit, OnDestroy, AfterViewInit {
     private _climaService: ClimaService,
     private _registroService: RegistroService
   ) {
+    //-----------------ACTUALIZACION DEL MAPA--------------------------
+    //Se realiza cada 5 segundos
     this.carga = false;
-    Observable.timer(0,1000*5)
+    Observable.timer(0,1000*5) //Cambiar este valor en caso de querer un intervalo distinto de actualizacion.
     .takeWhile(() => this.alive)
     .subscribe(() => {
+      //Se rrecorre el array de sensores, para asi actualizar cada PopUp en el mapa con su respectivo sensor.
       for(let i = 11; i < 15; i++){
         this._registroService.getUltimoRegistro(i).subscribe(
           response => {
             this.datos = response;
             if(this.datos.length != 0){
               this.marker[i-11]._popup.setContent(
+                //Actualizacion de los PopUp en el mapa.
                 "<div [(ngModel)]='climas'>" +
                 "<h4>Sensor: "+ this.datos[0].REMOTE_ID + "</h4>" +
                 "<b>Temperatura: "+ this.datos[0].AMBIENT_TEMPERATURE + "C°</b><br>" +
@@ -100,8 +103,8 @@ export class InicioComponent implements OnInit, OnDestroy, AfterViewInit {
           }
         );
       }
-    })
-   }
+    });
+  }
   ngAfterViewInit(): void {
         //Iniciando el mapa
         this.initMap();
@@ -141,12 +144,13 @@ export class InicioComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit(): void {
-    //Inciacion del clima
+    //Inciacion del clima actual en la pagina de inicio
     this.getClima();
-    //Iniciacion de la grafica a mostrar
+    //Iniciacion de la grafica a mostrar en la pagina de inicio
     this.getGrafica();    
   }
 
+  //Peticion HTTP hacia la Api clima-uta, donde se carga el clima atual en la ciudad de Iquique.
   getClima(){
     this._climaService.getClima().subscribe(
       response => {
@@ -160,6 +164,8 @@ export class InicioComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
+  //Peticion HTTP hacia la Api clima-uta, donde se cargan los datos a mostrar en la grafica
+  // de la pagina de inicio.
   getGrafica(){
     this._climaService.getClimaHoy().subscribe(
       response => {

@@ -27,6 +27,8 @@ export class RepositorioComponent implements OnInit {
     
   }
 
+//Peticion a la api clima-uta para realizar descarga de datos.
+
   descargar_registros(){
     this.registro = false;
     this._repositorioService.getRegistros().subscribe(
@@ -43,6 +45,7 @@ export class RepositorioComponent implements OnInit {
     
   }
 
+  //Peticion a la api clima-uta para realizar descarga de datos.
   descargar_climas(){
     this.clima = false;
     this._repositorioService.getClimaTotal().subscribe(
@@ -59,6 +62,7 @@ export class RepositorioComponent implements OnInit {
     
   }
 
+  //Peticion a la api clima-uta para realizar descarga de datos.
   descargar_prediccion(modelo, i){
     this.prediccion[i] = false;
     this._repositorioService.getPredicciones(modelo).subscribe(
@@ -75,14 +79,17 @@ export class RepositorioComponent implements OnInit {
     
   }
 
+  //Creacion del CSV con los datos obtenidos.
   download_registros(Data){
     this._repositorioService.downloadFile_registros(Data, 'registros_clima_uta');
   }
 
+  //Creacion del CSV con los datos obtenidos.
   download_clima(Data){
     this._repositorioService.downloadFile_clima(Data, 'climas_clima_uta');
   }
 
+  //Creacion del CSV con los datos obtenidos.
   download_prediccion(Data, modelo){
     this._repositorioService.downloadFile_prediccion(Data, modelo+'_clima_uta');
   }
