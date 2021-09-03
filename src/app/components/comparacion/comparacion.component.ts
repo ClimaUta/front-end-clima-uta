@@ -133,8 +133,8 @@ export class ComparacionComponent implements OnInit {
           this.data_temp_m1.push(dato_modelo1["AMBIENT_TEMPERATURE"]);
           this.data_press_m1.push(dato_modelo1["AIR_PRESSURE"]);
           this.data_hum_m1.push(dato_modelo1["HUMIDITY"]);
-          
-          this.label.push(dato_modelo1["hour"] + ":00");
+          var fecha = new Date(dato_modelo1["utc"]).getHours();
+          this.label.push( fecha + ":00");
         });
       },
       error => {
@@ -179,7 +179,7 @@ export class ComparacionComponent implements OnInit {
           this.data_press_m3.push(dato_modelo3["AIR_PRESSURE"]);
           this.data_hum_m3.push(dato_modelo3["HUMIDITY"]);
           
-          this.label_m3.push(dato_modelo3["hour"] + ":00");
+         // this.label_m3.push(dato_modelo3["hour"] + ":00");
         });
       },
       error => {
@@ -203,7 +203,7 @@ export class ComparacionComponent implements OnInit {
           this.data_press_m4.push(dato_modelo4["AIR_PRESSURE"]);
           this.data_hum_m4.push(dato_modelo4["HUMIDITY"]);
           
-          this.label_m3.push(dato_modelo4["hour"] + ":00");
+          //this.label_m3.push(dato_modelo4["hour"] + ":00");
         });
       },
       error => {
@@ -216,7 +216,7 @@ export class ComparacionComponent implements OnInit {
 
   //-----------------------CONFIGURACON DE LAS GRAFICAS-------------------
   lineChartLabels: Label[] = this.label;
-  lineChartLabels_m3: Label[] = this.label_m3;
+  //lineChartLabels_m3: Label[] = this.label_m3;
 
   lineChartOptions = {
     responsive: true
