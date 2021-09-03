@@ -263,7 +263,7 @@ export class ComparacionComponent implements OnInit {
 
   lineChartData_hum_m2: ChartDataSets[] = [
     { data: this.data_hum_m2, label: 'Humedad modelo 2' },
-    { data: this.data_temp_hoy, label: 'Humedad capturada' }
+    { data: this.data_hum_hoy, label: 'Humedad capturada' }
   ];
 
  //--------------Graficas - Modelo 3-----------------------
