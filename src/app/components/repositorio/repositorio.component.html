@@ -20,23 +20,23 @@
           <div class="row">
             <div class="col">
               <div *ngIf="registro; else noRegistro">
-                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_registros()"><i class="fas fa-download"></i> Descargar registros.csv</button>
+                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_registros()"><i class="fas fa-download"></i> Descargar registros.csv - ({{pesos[0]["Tamaño (MB)"]}}MB)</button>
               </div>
               <ng-template #noRegistro>
                 <button class="btn btn-primary btn-md boton" type="button" disabled>
                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  Descargar registros.csv
+                  Descargar registros.csv - ({{pesos[0]["Tamaño (MB)"]}}MB)
                 </button>
               </ng-template>
             </div>
             <div class="col">
               <div *ngIf="clima; else noRegistro">
-                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_climas()"><i class="fas fa-download"></i> Descargar climas.csv</button>
+                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_climas()"><i class="fas fa-download"></i> Descargar climas.csv - ({{pesos[5]["Tamaño (MB)"]}}MB)</button>
               </div>
               <ng-template #noRegistro>
                 <button class="btn btn-primary btn-md boton" type="button" disabled>
                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  Descargar climas.csv
+                  Descargar climas.csv - ({{pesos[5]["Tamaño (MB)"]}}MB)
                 </button>
               </ng-template>
             </div>
@@ -48,23 +48,23 @@
           <div class="row">
             <div class="col">
               <div *ngIf="prediccion[0]; else noRegistro">
-                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_prediccion('rfPredictions')"><i class="fas fa-download"></i> Descargar predicciones RF.csv</button>
+                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_prediccion('rfPredictions')"><i class="fas fa-download"></i> Descargar predicciones RF.csv - ({{pesos[4]["Tamaño (MB)"]}}MB)</button>
               </div>
               <ng-template #noRegistro>
                 <button class="btn btn-primary btn-md boton" type="button" disabled>
                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  Descargar predicciones RF.csv
+                  Descargar predicciones RF.csv - ({{pesos[4]["Tamaño (MB)"]}}MB)
                 </button>
               </ng-template>
             </div>
             <div class="col">
               <div *ngIf="prediccion[1]; else noRegistro">
-                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_prediccion('dnnPredictions')"><i class="fas fa-download"></i> Descargar predicciones DNN.csv</button>
+                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_prediccion('dnnPredictions')"><i class="fas fa-download"></i> Descargar predicciones DNN.csv - ({{pesos[2]["Tamaño (MB)"]}}MB)</button>
               </div>
               <ng-template #noRegistro>
                 <button class="btn btn-primary btn-md boton" type="button" disabled>
                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  Descargar predicciones DNN.csv
+                  Descargar predicciones DNN.csv - ({{pesos[2]["Tamaño (MB)"]}}MB)
                 </button>
               </ng-template>
             </div>
@@ -75,23 +75,23 @@
           <div class="row">
             <div class="col">
               <div *ngIf="prediccion[2]; else noRegistro">
-                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_prediccion('arimaPredictions')"><i class="fas fa-download"></i> Descargar predicciones ARIMA.csv</button>
+                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_prediccion('arimaPredictions')"><i class="fas fa-download"></i> Descargar predicciones ARIMA.csv - ({{pesos[1]["Tamaño (MB)"]}}MB)</button>
               </div>
               <ng-template #noRegistro>
                 <button class="btn btn-primary btn-md boton" type="button" disabled>
                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  Descargar predicciones ARIMA.csv
+                  Descargar predicciones ARIMA.csv - ({{pesos[1]["Tamaño (MB)"]}}MB)
                 </button>
               </ng-template>
             </div>
             <div class="col">
               <div *ngIf="prediccion[3]; else noRegistro">
-                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_prediccion('predictions')"><i class="fas fa-download"></i> Descargar predicciones LSTM.csv</button>
+                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_prediccion('predictions')"><i class="fas fa-download"></i> Descargar predicciones LSTM.csv - ({{pesos[3]["Tamaño (MB)"]}}MB)</button>
               </div>
               <ng-template #noRegistro>
                 <button class="btn btn-primary btn-md boton" type="button" disabled>
                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  Descargar predicciones LSTM.csv
+                  Descargar predicciones LSTM.csv - ({{pesos[3]["Tamaño (MB)"]}}MB)
                 </button>
               </ng-template>
             </div>

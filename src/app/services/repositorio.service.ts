@@ -34,6 +34,11 @@ export class RepositorioService {
         return this._http.get(this.urlApi+'prediccion-total/'+ modelo, {headers: headers});
     }
 
+    getTamano(): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'Application/json');
+
+        return this._http.get(this.urlApi+'tamano/', {headers: headers});
+    }
     //Tabulacion de datos
 
     ConvertToCSV(objArray, headerList) {

@@ -13,6 +13,7 @@ export class RepositorioComponent implements OnInit {
   public registro: boolean;
   public clima: boolean;
   public prediccion: boolean[];
+  public pesos: string[];
 
   constructor(
     private _repositorioService: RepositorioService
@@ -21,6 +22,7 @@ export class RepositorioComponent implements OnInit {
     this.registro = true;
     this.clima = true;
     this.prediccion = [true, true, true, true];
+    this.tamanos();
   }
 
   ngOnInit(): void {
@@ -28,6 +30,19 @@ export class RepositorioComponent implements OnInit {
   }
 
 //Peticion a la api clima-uta para realizar descarga de datos.
+
+  tamanos(){
+    this._repositorioService.getTamano().subscribe(
+      response => {
+        console.log(response);
+        this.pesos = response;
+        console.log(this.pesos[0]);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
 
   descargar_registros(){
     this.registro = false;
