@@ -37,3 +37,9 @@
     top: -2px;
     background-color: #0275d8;
 }
+
+.my-custom-scrollbar_2 {
+    position: relative;
+    height: 190px;
+    overflow: auto;
+    }

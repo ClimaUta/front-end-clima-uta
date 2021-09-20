@@ -17,6 +17,12 @@ export class ComparacionComponent implements OnInit {
 
   public climas: Clima;
   public clima_hoy: Clima[];
+  public PError_Temp = [];
+  public PError_Press = [];
+  public PError_Hum = [];
+
+  public PError = {};
+
   public data_temp_m1 = [];
   public data_press_m1 = [];
   public data_hum_m1 = [];
@@ -48,7 +54,7 @@ export class ComparacionComponent implements OnInit {
   public temp: number;
   public pres: number;
   public hum: number;
-  public cielo: string;
+  //public cielo: string;
   public carga1: boolean;
   public carga2: boolean;
 
@@ -70,8 +76,13 @@ export class ComparacionComponent implements OnInit {
     this.getPredicciones_dnn();
     this.getPredicciones_arima();
     this.getPredicciones_lstm();
+    this.getError("rfPredictions",0);
+    this.getError("dnnPredictions",1);
+    this.getError("arimaPredictions",2);
+    this.getError("predictions",3);
   }
 
+  //Peticion HTTP hacia la Api clima-uta, para obtener el clima actual.
   getClima(){
     this._climaService.getClima().subscribe(
       response => {
@@ -112,7 +123,7 @@ export class ComparacionComponent implements OnInit {
         this.temp = Math.round(response['main']['temp']);
         this.pres = response['main']['pressure'];
         this.hum = response['main']['humidity'];
-        this.cielo = response['weather']['0']['main'];
+        //this.cielo = response['weather']['0']['main'];
         this.carga2 = true;
       },
       error => {
@@ -120,6 +131,12 @@ export class ComparacionComponent implements OnInit {
       }
     );
   }
+
+  //----------------------------CONSULTAS A LA API CLIMA-UTA PARA OBTENER LAS PREDICCIONES DE LOS MODELOS--------------
+  /*
+  El siguiente lote de codigo es una sucecion de peticiones a la Api Clima-uta, para obtener las predicciones
+  realizadas por los distintos modelos, ademas de preparar dichos datos para su posterior presentacion. 
+  */
 
   getPredicciones_rf(){
     this._prediccionesService.getPredicciones("rfPredictions").subscribe(
@@ -143,6 +160,7 @@ export class ComparacionComponent implements OnInit {
     );
   }
 
+
   getPredicciones_dnn(){
     this._prediccionesService.getPredicciones("dnnPredictions").subscribe(
       response => {
@@ -156,7 +174,6 @@ export class ComparacionComponent implements OnInit {
           this.data_press_m2.push(dato_modelo2["AIR_PRESSURE"]);
           this.data_hum_m2.push(dato_modelo2["HUMIDITY"]);
 
-          //this.label.push(dato_modelo2["hour"] + ":00");
           
         });
       },
@@ -179,7 +196,6 @@ export class ComparacionComponent implements OnInit {
           this.data_press_m3.push(dato_modelo3["AIR_PRESSURE"]);
           this.data_hum_m3.push(dato_modelo3["HUMIDITY"]);
           
-         // this.label_m3.push(dato_modelo3["hour"] + ":00");
         });
       },
       error => {
@@ -188,7 +204,6 @@ export class ComparacionComponent implements OnInit {
     );
   }
 
- //----------------------------CONSULTAS A LA API CLIMA-UTA PARA OBTENER LAS PREDICCIONES DE LOS MODELOS--------------
 
   getPredicciones_lstm(){
     this._prediccionesService.getPredicciones("").subscribe(
@@ -203,7 +218,6 @@ export class ComparacionComponent implements OnInit {
           this.data_press_m4.push(dato_modelo4["AIR_PRESSURE"]);
           this.data_hum_m4.push(dato_modelo4["HUMIDITY"]);
           
-          //this.label_m3.push(dato_modelo4["hour"] + ":00");
         });
       },
       error => {
@@ -212,9 +226,52 @@ export class ComparacionComponent implements OnInit {
     );
   }
 
-  //-----------------------CONFIGURACION TABLA----------------------------
+  //----------------------------CALCULO % DE ERROR--------------------------------------
+  /*
+  El siguiente lote de codigo calcula el porcentaje de error de los distintos modelos, utilizando la formula
+  de % de error.
+  */
+
+  getError(modelo, k){
+    this._climaService.getComparacion().subscribe(
+      response => {
+        var valores = response;
+        //console.log(prueba);
+        this._prediccionesService.getPredicciones(modelo).subscribe(
+          response => {
+            var valores2 = response;
+            //console.log(prueba2);
+            valores2.sort((a,b) => { return a.id - b.id});
+            var j = 0;
+            var acum;
+            var acum2 = 0;
+            var acum3 = 0;
+            for(var i = 0; i < valores.length; i++){
+              if(valores[i]["AMBIENT_TEMPERATURE"] != 0){
+                acum = Number((Math.abs((valores[i]["AMBIENT_TEMPERATURE"]) - (valores2[i]["AMBIENT_TEMPERATURE"]))).toFixed(2)); 
+                acum2 = Number((Math.abs((valores[i]["AIR_PRESSURE"]) - (valores2[i]["AIR_PRESSURE"]))).toFixed(2)); 
+                acum3 = Number((Math.abs((valores[i]["HUMIDITY"]) - (valores2[i]["HUMIDITY"]))).toFixed(2));
+                //console.log(acum);
+                j++;
+              }
+            }
+            this.PError_Temp[k] = ((acum/(j)).toFixed(2));
+            this.PError_Press[k] = ((acum2/(j)).toFixed(2));
+            this.PError_Hum[k] = ((acum3/(j)).toFixed(2));
+            
+            
+          }
+        )
+      }
+    )
+
+  }
 
   //-----------------------CONFIGURACON DE LAS GRAFICAS-------------------
+  /*
+    Configuracion inicial de las graficas mostradas en el apartado configuracion.
+    Aqui se puede elegir el color de las lineas, entre otras opciones mas avanzadas.
+  */
   lineChartLabels: Label[] = this.label;
   //lineChartLabels_m3: Label[] = this.label_m3;
 
@@ -233,7 +290,16 @@ export class ComparacionComponent implements OnInit {
   lineChartPlugins = [];
   lineChartType = 'line';
 
-  //--------------Graficas - Modelo 1-----------------------
+  //--------------------GRAFICAS--------------------------
+  /*
+    Asignaion de los datos obtenidos en cada tabla respectivamente
+    data_***_m1 = RF
+    data_***_m2 = DNN
+    data_***_m3 = ARIMA
+    data_***_m4 = LSTM
+  */
+
+  //--------------Graficas - Modelo RF-----------------------
   lineChartData_temp_m1: ChartDataSets[] = [
     { data: this.data_temp_m1, label: 'Temperatura modelo 1' },
     { data: this.data_temp_hoy, label: 'Temperatura capturada' }
@@ -250,7 +316,7 @@ export class ComparacionComponent implements OnInit {
     { data: this.data_hum_hoy, label: 'Humedad capturada' }
   ];
 
- //--------------Graficas - Modelo 2-----------------------
+ //--------------Graficas - Modelo DNN-----------------------
   lineChartData_temp_m2: ChartDataSets[] = [
     { data: this.data_temp_m2, label: 'Temperatura modelo 2' },
     { data: this.data_temp_hoy, label: 'Temperatura capturada' }
@@ -266,7 +332,7 @@ export class ComparacionComponent implements OnInit {
     { data: this.data_hum_hoy, label: 'Humedad capturada' }
   ];
 
- //--------------Graficas - Modelo 3-----------------------
+ //--------------Graficas - Modelo ARIMA-----------------------
   lineChartData_temp_m3: ChartDataSets[] = [
     { data: this.data_temp_m3, label: 'Temperatura modelo 3' },
     { data: this.data_temp_hoy, label: 'Temperatura capturada' }
@@ -282,7 +348,7 @@ export class ComparacionComponent implements OnInit {
     { data: this.data_hum_hoy, label: 'Humedad capturada' }
   ];
 
-  //--------------Graficas - Modelo 3-----------------------
+  //--------------Graficas - Modelo LSTM-----------------------
   lineChartData_temp_m4: ChartDataSets[] = [
     { data: this.data_temp_m4, label: 'Temperatura modelo 4' },
     { data: this.data_temp_hoy, label: 'Temperatura capturada' }

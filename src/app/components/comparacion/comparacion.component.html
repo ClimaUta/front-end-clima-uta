@@ -64,6 +64,7 @@
         <button class="nav-link borde" id="nav-dnn-tab" data-bs-toggle="tab" data-bs-target="#nav-dnn" type="button" role="tab" aria-controls="nav-dnn" aria-selected="false">DNN</button>
         <button class="nav-link borde" id="nav-arima-tab" data-bs-toggle="tab" data-bs-target="#nav-arima" type="button" role="tab" aria-controls="nav-arima" aria-selected="false">ARIMA</button>
         <button class="nav-link borde" id="nav-lstm-tab" data-bs-toggle="tab" data-bs-target="#nav-lstm" type="button" role="tab" aria-controls="nav-lstm" aria-selected="false">LSTM</button>
+        <button class="nav-link borde" id="nav-error-tab" data-bs-toggle="tab" data-bs-target="#nav-error" type="button" role="tab" aria-controls="nav-error" aria-selected="false">% Error</button>
       </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
@@ -427,6 +428,68 @@
               [plugins]="lineChartPlugins">
           </canvas>
         </div>
+
+
+        <!--Fin cntendino del TAB-->
+
+      </div>
+
+      <div class="tab-pane fade" id="nav-error" role="tabpanel" aria-labelledby="nav-error-tab">
+        <!--Contenido del TAB-->
+        <div class="card text-center border border-primary">
+          <div class="card-header bg-primary">
+            <h5 class="text-bar">Porcentaje de error en los modelos</h5>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <div class="table-wrapper-scroll-y my-custom-scrollbar_2" *ngIf="carga1; else noCargado">
+                <table class="table table-bordered table-striped mb-0">
+                  <thead>
+                    <tr>
+                      <th class="header" scope="col">Variable</th>
+                      <th class="header" scope="col" >RF</th>
+                      <th class="header" scope="col">DNN</th>
+                      <th class="header" scope="col">ARIMA</th>
+                      <th class="header" scope="col">LSTM</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th class="header" scope="col">Temperatura</th>
+                      <td>{{PError_Temp[0]}}%</td>
+                      <td>{{PError_Temp[1]}}%</td>
+                      <td>{{PError_Temp[2]}}%</td>
+                      <td>{{PError_Temp[3]}}%</td>
+                    </tr>
+                    <tr>
+                      <th class="header" scope="col">Presion</th>
+                      <td>{{PError_Press[0]}}%</td>
+                      <td>{{PError_Press[1]}}%</td>
+                      <td>{{PError_Press[2]}}%</td>
+                      <td>{{PError_Press[3]}}%</td>
+                    </tr>
+                    <tr>
+                      <th class="header" scope="col">Humedad</th>
+                      <td>{{PError_Hum[0]}}%</td>
+                      <td>{{PError_Hum[1]}}%</td>
+                      <td>{{PError_Hum[2]}}%</td>
+                      <td>{{PError_Hum[3]}}%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <ng-template #noCargado>
+                <div class="spinner-border text-primary align-middle" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+                <h3>Cargando...</h3><br>
+              </ng-template>
+            </blockquote>
+          </div>
+        </div>
+
+        
 
 
         <!--Fin cntendino del TAB-->
