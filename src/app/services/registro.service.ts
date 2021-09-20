@@ -14,6 +14,11 @@ export class RegistroService{
         this.url = Global.url;
     }
 
+    /**
+     * Peticion a la api Clima-uta para la obtencion del ultimo valor registrado por cada sensor.
+     * @param idRaspi = ID del modelo deseado.
+     * @returns = Ultimo registro de dicho moelo.
+     */
     getUltimoRegistro(idRaspi): Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'Application/json');
 

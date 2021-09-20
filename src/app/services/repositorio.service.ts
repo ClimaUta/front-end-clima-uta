@@ -15,7 +15,10 @@ export class RepositorioService {
     ){
         this.urlApi = Global.url;
     }
-
+//----------------------PETICIONES HTTP----------------------------------------
+/**
+ * El siguiente conjunto de codigo solo son peticiones a la api clima-uta
+ */
     getRegistros(): Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'Application/json');
 
@@ -27,6 +30,11 @@ export class RepositorioService {
 
         return this._http.get(this.urlApi+'climas-total', {headers: headers});
     }
+/**
+ * 
+ * @param modelo = el nombre de la tabla que se quieren obtener datos.
+ * @returns Conjunto de valores predichos por los distintos modelos.
+ */    
 
     getPredicciones(modelo): Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'Application/json');
@@ -40,7 +48,12 @@ export class RepositorioService {
         return this._http.get(this.urlApi+'tamano/', {headers: headers});
     }
     //Tabulacion de datos
-
+/**
+ * El siguiete codigo prepara los datos obtenidos para su posterior descarga
+ * @param objArray = Array de datos obtenidos.
+ * @param headerList = Array con las cabeceras de la tabla.
+ * @returns Un array combinado de los dos anteriores.
+ */
     ConvertToCSV(objArray, headerList) {
          let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
          let str = '';
@@ -64,6 +77,11 @@ export class RepositorioService {
     }
 
     //Conversion a achivo CSV y descarga.
+    /**
+     * El siguiente conjunto decodigo permite la descarga de los archivos, inependiente del navegador.
+     * @param data = Array de datos.
+     * @param filename = Nombre que tendra archivo descargado.
+     */
 
     downloadFile_registros(data, filename='data') {
         let csvData = this.ConvertToCSV(data, ['REMOTE_ID', 'AMBIENT_TEMPERATURE', 'AIR_PRESSURE', 'HUMIDITY', 'CREATED', 'serverDate']);

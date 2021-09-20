@@ -15,7 +15,12 @@ export class PrediccionesService {
     ){
         this.urlApi = Global.url;
     }
-
+    
+/**
+ * Peticion a la api Clima-Uta para la obtencion de los datos pedichos.
+ * @param modelo = Nombre de la tabla que se quiere obtener datos.
+ * @returns = Datos pedichos.
+ */
     getPredicciones(modelo): Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'Application/json');
 

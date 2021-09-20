@@ -29,8 +29,7 @@ export class RepositorioComponent implements OnInit {
     
   }
 
-//Peticion a la api clima-uta para realizar descarga de datos.
-
+//Peticion a la api Clima-uta para mostrar tamaños aprox de los archivos
   tamanos(){
     this._repositorioService.getTamano().subscribe(
       response => {
@@ -44,6 +43,7 @@ export class RepositorioComponent implements OnInit {
     )
   }
 
+  //Peticion a la api clima-uta para realizar descarga de datos.
   descargar_registros(){
     this.registro = false;
     this._repositorioService.getRegistros().subscribe(

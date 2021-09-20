@@ -21,6 +21,11 @@ export class ClimaService{
 
     }
 
+    /**
+     * Peticiones a la api clima-uta con distintas configuraciones, par usos especificos.
+     * @returns = Array de datos climaticos.
+     */
+
     getClima(): Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'Application/json');
 
