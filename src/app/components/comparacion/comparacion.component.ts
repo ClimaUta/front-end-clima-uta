@@ -297,6 +297,7 @@ export class ComparacionComponent implements OnInit {
     data_***_m2 = DNN
     data_***_m3 = ARIMA
     data_***_m4 = LSTM
+    data_***_hoy = Valores reales
   */
 
   //--------------Graficas - Modelo RF-----------------------
