@@ -246,14 +246,14 @@ export class ComparacionComponent implements OnInit {
             var acum3 = 0;
             for(var i = 0; i < valores.length; i++){
               if(valores[i]["AMBIENT_TEMPERATURE"] != 0){
-                acum = Number((Math.abs((valores[i]["AMBIENT_TEMPERATURE"]) - (valores2[i]["AMBIENT_TEMPERATURE"]))).toFixed(2)); 
+                /*acum = Number((Math.abs((valores[i]["AMBIENT_TEMPERATURE"]) - (valores2[i]["AMBIENT_TEMPERATURE"]))).toFixed(2)); 
                 acum2 = Number((Math.abs((valores[i]["AIR_PRESSURE"]) - (valores2[i]["AIR_PRESSURE"]))).toFixed(2)); 
-                acum3 = Number((Math.abs((valores[i]["HUMIDITY"]) - (valores2[i]["HUMIDITY"]))).toFixed(2));
+                acum3 = Number((Math.abs((valores[i]["HUMIDITY"]) - (valores2[i]["HUMIDITY"]))).toFixed(2));*/
                 j++;
-                /*acum = Math.abs(Number(valores[i]["AMBIENT_TEMPERATURE"]) - Number(valores2[i]["AMBIENT_TEMPERATURE"]));
+                acum = Math.abs(Number(valores[i]["AMBIENT_TEMPERATURE"]) - Number(valores2[i]["AMBIENT_TEMPERATURE"]));
                 acum2 = Math.abs(Number(valores[i]["AIR_PRESSURE"]) - Number(valores2[i]["AIR_PRESSURE"]));
                 acum3 = Math.abs(Number(valores[i]["HUMIDITY"]) - Number(valores2[i]["HUMIDITY"]));
-                console.log(typeof(acum));*/
+                console.log(typeof(acum));
               }
             }
             console.log(j);
