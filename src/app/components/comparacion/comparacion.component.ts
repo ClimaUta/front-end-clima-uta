@@ -236,11 +236,9 @@ export class ComparacionComponent implements OnInit {
     this._climaService.getComparacion().subscribe(
       response => {
         var valores = response;
-        //console.log(prueba);
         this._prediccionesService.getPredicciones(modelo).subscribe(
           response => {
             var valores2 = response;
-            //console.log(prueba2);
             valores2.sort((a,b) => { return a.id - b.id});
             var j = 0;
             var acum;
@@ -251,13 +249,17 @@ export class ComparacionComponent implements OnInit {
                 acum = Number((Math.abs((valores[i]["AMBIENT_TEMPERATURE"]) - (valores2[i]["AMBIENT_TEMPERATURE"]))).toFixed(2)); 
                 acum2 = Number((Math.abs((valores[i]["AIR_PRESSURE"]) - (valores2[i]["AIR_PRESSURE"]))).toFixed(2)); 
                 acum3 = Number((Math.abs((valores[i]["HUMIDITY"]) - (valores2[i]["HUMIDITY"]))).toFixed(2));
-                //console.log(acum);
                 j++;
+                /*acum = Math.abs(Number(valores[i]["AMBIENT_TEMPERATURE"]) - Number(valores2[i]["AMBIENT_TEMPERATURE"]));
+                acum2 = Math.abs(Number(valores[i]["AIR_PRESSURE"]) - Number(valores2[i]["AIR_PRESSURE"]));
+                acum3 = Math.abs(Number(valores[i]["HUMIDITY"]) - Number(valores2[i]["HUMIDITY"]));
+                console.log(typeof(acum));*/
               }
             }
-            this.PError_Temp[k] = ((acum/(j)).toFixed(2));
-            this.PError_Press[k] = ((acum2/(j)).toFixed(2));
-            this.PError_Hum[k] = ((acum3/(j)).toFixed(2));
+            console.log(j);
+            this.PError_Temp[k] = ((acum*100/(j)).toFixed(2));
+            this.PError_Press[k] = ((acum2*100/(j)).toFixed(2));
+            this.PError_Hum[k] = ((acum3*100/(j)).toFixed(2));
             
             
           }
