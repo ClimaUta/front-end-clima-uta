@@ -55,9 +55,8 @@
     </div>
   </div>
 
-
-
   <div class="espacio">
+
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <button class="nav-link active" id="nav-rf-tab" data-bs-toggle="tab" data-bs-target="#nav-rf" type="button" role="tab" aria-controls="nav-rf" aria-selected="true">RF</button>
@@ -72,15 +71,53 @@
         <!--Contenido del TAB-->
         <div class="card text-center border border-primary">
           <div class="card-header bg-primary">
-            <h5 class="text-bar">Nuestras predicciones</h5>
+            <h5 class="text-bar">Porcentaje de error promedio</h5>
           </div>
           <div class="card-body">
             <blockquote class="blockquote mb-0">
               <h2>Random Forest</h2>
               <!----------------------------------------------------------------------------------------------->
-              
+              <div class="table-wrapper-scroll-y my-custom-scrollbar_3">
+                <table class="table table-bordered table-striped mb-0">
+                  <thead>
+                    <tr>
+                      <th class="header" scope="col">Test</th>
+                      <th class="header" scope="col">Humedad relativa</th>
+                      <th class="header" scope="col" >Presion atmosferica</th>
+                      <th class="header" scope="col">Temperatura</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th class="header" scope="col">Test tradicional</th>
+                      <td>2,08583333</td>
+                      <td>0,26495833</td>
+                      <td>0,39286111</td>
+                    </tr>
+                    <tr>
+                      <th class="header" scope="col">Test de autonomía</th>
+                      <td>9,36986139</td>
+                      <td>1,31571181</td>
+                      <td>1,97737499</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </blockquote>
+          </div>
+        </div>
 
+        <div class="espacio2">
 
+        </div>
+        
+        <div class="card text-center border border-primary">
+          <div class="card-header bg-primary">
+            <h5 class="text-bar">Nuestras predicciones</h5>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              <!----------------------------------------------------------------------------------------------->
               <!----------------------------------------------------------------------------------------------->
               <div class="table-wrapper-scroll-y my-custom-scrollbar" *ngIf="carga1; else noCargado">
                 <table class="table table-bordered table-striped mb-0">
@@ -168,11 +205,52 @@
         <!--Contenido del TAB-->
         <div class="card text-center border border-primary">
           <div class="card-header bg-primary">
-            <h5 class="text-bar">Nuestras predicciones</h5>
+            <h5 class="text-bar">Porcentaje de error promedio</h5>
           </div>
           <div class="card-body">
             <blockquote class="blockquote mb-0">
               <h2>Deep Neural Networks</h2>
+              <!----------------------------------------------------------------------------------------------->
+              <div class="table-wrapper-scroll-y my-custom-scrollbar_3">
+                <table class="table table-bordered table-striped mb-0">
+                  <thead>
+                    <tr>
+                      <th class="header" scope="col">Test</th>
+                      <th class="header" scope="col">Humedad relativa</th>
+                      <th class="header" scope="col" >Presion atmosferica</th>
+                      <th class="header" scope="col">Temperatura</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th class="header" scope="col">Test tradicional</th>
+                      <td>5,24336752</td>
+                      <td>1,49372638</td>
+                      <td>0,87773892</td>
+                    </tr>
+                    <tr>
+                      <th class="header" scope="col">Test de autonomía</th>
+                      <td>5,24336752</td>
+                      <td>1,49372638</td>
+                      <td>0,87773892</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </blockquote>
+          </div>
+        </div>
+
+        <div class="espacio2">
+
+        </div>
+
+        <div class="card text-center border border-primary">
+          <div class="card-header bg-primary">
+            <h5 class="text-bar">Nuestras predicciones</h5>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
               <div class="table-wrapper-scroll-y my-custom-scrollbar" *ngIf="carga1; else noCargado">
                 <table class="table table-bordered table-striped mb-0">
                   <thead>
@@ -258,11 +336,51 @@
         <!--Contenido del TAB-->
         <div class="card text-center border border-primary">
           <div class="card-header bg-primary">
-            <h5 class="text-bar">Nuestras predicciones</h5>
+            <h5 class="text-bar">Porcentaje de error promedio</h5>
           </div>
           <div class="card-body">
             <blockquote class="blockquote mb-0">
               <h2>Autoregressive Integrated Moving Average</h2>
+              <!----------------------------------------------------------------------------------------------->
+              <div class="table-wrapper-scroll-y my-custom-scrollbar_3">  
+                <table class="table table-bordered table-striped mb-0">
+                  <thead>
+                    <tr>
+                      <th class="header" scope="col">Test</th>
+                      <th class="header" scope="col">Humedad relativa</th>
+                      <th class="header" scope="col" >Presion atmosferica</th>
+                      <th class="header" scope="col">Temperatura</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th class="header" scope="col">Test tradicional</th>
+                      <td>No aplica</td>
+                      <td>No aplica</td>
+                      <td>No aplica</td>
+                    </tr>
+                    <tr>
+                      <th class="header" scope="col">Test de autonomía</th>
+                      <td>5,48186191</td>
+                      <td>7,58326669</td>
+                      <td>0,90759371</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </blockquote>
+          </div>
+        </div>
+
+        <div class="espacio2">
+
+        </div>
+        <div class="card text-center border border-primary">
+          <div class="card-header bg-primary">
+            <h5 class="text-bar">Nuestras predicciones</h5>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
               <div class="table-wrapper-scroll-y my-custom-scrollbar" *ngIf="carga1; else noCargado">
                 <table class="table table-bordered table-striped mb-0">
                   <thead>
@@ -349,11 +467,52 @@
         <!--Contenido del TAB-->
         <div class="card text-center border border-primary">
           <div class="card-header bg-primary">
-            <h5 class="text-bar">Nuestras predicciones</h5>
+            <h5 class="text-bar">Porcentaje de error promedio</h5>
           </div>
           <div class="card-body">
             <blockquote class="blockquote mb-0">
               <h2>Long Short-Term Memory</h2>
+              <!----------------------------------------------------------------------------------------------->
+              <div class="table-wrapper-scroll-y my-custom-scrollbar_3">
+                <table class="table table-bordered table-striped mb-0">
+                  <thead>
+                    <tr>
+                      <th class="header" scope="col">Test</th>
+                      <th class="header" scope="col">Humedad relativa</th>
+                      <th class="header" scope="col" >Presion atmosferica</th>
+                      <th class="header" scope="col">Temperatura</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th class="header" scope="col">Test tradicional</th>
+                      <td>3,97038671</td>
+                      <td>0,65419143</td>
+                      <td>0,68627701</td>
+                    </tr>
+                    <tr>
+                      <th class="header" scope="col">Test de autonomía</th>
+                      <td>5,04324782</td>
+                      <td>2,4992333</td>
+                      <td>0,81165004</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </blockquote>
+          </div>
+        </div>
+
+        <div class="espacio2">
+
+        </div>
+
+        <div class="card text-center border border-primary">
+          <div class="card-header bg-primary">
+            <h5 class="text-bar">Nuestras predicciones</h5>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
               <div class="table-wrapper-scroll-y my-custom-scrollbar" *ngIf="carga1; else noCargado">
                 <table class="table table-bordered table-striped mb-0">
                   <thead>

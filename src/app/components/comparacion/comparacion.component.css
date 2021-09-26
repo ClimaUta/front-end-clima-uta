@@ -43,3 +43,9 @@
     height: 190px;
     overflow: auto;
     }
+
+.my-custom-scrollbar_3 {
+    position: relative;
+    height: 145px;
+    overflow: auto;
+}
