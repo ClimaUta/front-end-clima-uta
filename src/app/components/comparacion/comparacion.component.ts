@@ -253,7 +253,7 @@ export class ComparacionComponent implements OnInit {
                 acum = Math.abs(Number(valores[i]["AMBIENT_TEMPERATURE"]) - Number(valores2[i]["AMBIENT_TEMPERATURE"]));
                 acum2 = Math.abs(Number(valores[i]["AIR_PRESSURE"]) - Number(valores2[i]["AIR_PRESSURE"]));
                 acum3 = Math.abs(Number(valores[i]["HUMIDITY"]) - Number(valores2[i]["HUMIDITY"]));
-                console.log(typeof(acum));
+                //console.log(typeof(acum));
               }
             }
             console.log(j);
