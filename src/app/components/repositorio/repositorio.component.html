@@ -20,14 +20,17 @@
           <div class="row">
             <div class="col">
               <div *ngIf="registro; else noRegistro">
-                <button type="button" class="btn btn-primary t btn-md boton" (click)="descargar_registros()"><i class="fas fa-download"></i> Descargar registros.csv - ({{pesos[0]["Tamaño (MB)"]}}MB)</button>
+                <a href="assets/img/WEATHER_MEASUREMENT.csv" download="WEATHER_MEASUREMENT.csv" type="button" class="btn btn-primary t btn-md boton" ><i class="fas fa-download"></i> 
+			Descargar registros.csv - ({{pesos[0]["Tamaño (MB)"]}}MB) 
+		</a>
+		<!--<button type="button" class="btn btn-primary t btn-md boton" ><i class="fas fa-download"></i> <a href="assets/img/WEATHER_MEASUREMENT.csv" download="WEATHER_MEASUREMENT.csv">Descargar registros.csv - ({{pesos[0]["Tamaño (MB)"]}}MB)</a></button>-->
               </div>
-              <ng-template #noRegistro>
+	      <ng-template #noRegistro>
                 <button class="btn btn-primary btn-md boton" type="button" disabled>
                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                  Descargar registros.csv - ({{pesos[0]["Tamaño (MB)"]}}MB)
+		  <!--<a download="WEATHER_MEASUREMENT.csv">Descargar registros.csv - ({{pesos[0]["Tamaño (MB)"]}}MB)</a>-->
                 </button>
-              </ng-template>
+		</ng-template>
             </div>
             <div class="col">
               <div *ngIf="clima; else noRegistro">
