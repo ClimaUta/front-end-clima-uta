@@ -91,7 +91,8 @@ export class InicioComponent implements OnInit, OnDestroy, AfterViewInit {
     .takeWhile(() => this.alive)
     .subscribe(() => {
       //Se rrecorre el array de sensores, para asi actualizar cada PopUp en el mapa con su respectivo sensor.
-      for(let i = 11; i < 15; i++){
+      // cambios 01-09-22, dejar solo sensores 12 y 13
+      for(let i = 12; i < 14; i++){
         this._registroService.getUltimoRegistro(i).subscribe(
           response => {
             this.datos = response;
@@ -124,11 +125,11 @@ export class InicioComponent implements OnInit, OnDestroy, AfterViewInit {
          * Valor inicial en el popup definido como "Fuera de servicio".
          * Cambiar los valores dentro de L.circle para cambiar la posicion de cada sensor.
          */
-        this.marker[0] = L.circle([-20.252431, -70.126771], 200, {color: "red"}).addTo(this.map);
+	/*this.marker[0] = L.circle([-20.252431, -70.126771], 200, {color: "red"}).addTo(this.map);
         this.marker[0].bindPopup(
           "<h4>Sensor: 11</h4>" +
           "Fuera de servicio"
-          );
+	  );*/
     
         this.marker[1] = L.circle([-20.214258, -70.133578], 200, {color: "green"}).addTo(this.map);
         this.marker[1].bindPopup(
@@ -136,17 +137,18 @@ export class InicioComponent implements OnInit, OnDestroy, AfterViewInit {
           "Fuera de servicio"
           );
         
-        this.marker[2] = L.circle([-20.237312, -70.130552], 200, {color: "purple"}).addTo(this.map);
+	  //this.marker[2] = L.circle([-20.237312, -70.130552], 200, {color: "purple"}).addTo(this.map); //traslado a U del mar
+        this.marker[2] = L.circle([-20.279739, -70.126778], 200, {color: "purple"}).addTo(this.map);
         this.marker[2].bindPopup(
           "<h4>Sensor: 13</h4>" +
           "Fuera de servicio"
           );
     
-        this.marker[3] = L.circle([-20.223989, -70.134682], 200).addTo(this.map);
+	/*this.marker[3] = L.circle([-20.223989, -70.134682], 200).addTo(this.map);
         this.marker[3].bindPopup(
           "<h4>Sensor: 14</h4>" +
           "Fuera de servicio"
-          );
+	  );*/
     
     
     
